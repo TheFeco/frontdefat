@@ -2,7 +2,7 @@
 
 <!--INICIO del cont principal-->
 <div class="container">
-    <h1>Informes Trimestrales</h1>
+    <h1>Captura de datos</h1>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">            
@@ -47,12 +47,26 @@
         <form id="formInformes" enctype="multipart/form-data" class="needs-validation" novalidate>    
             <div class="modal-body">
                 <div class="form-group">
-                <label for="nombre" class="col-form-label">Nombre Compelto Rte:</label>
+                <label for="funcion" class="col-form-label">Función:</label>
+                <select id="funcion" class="form-control" name="funcion">
+                    <option value="">Seleccionar...</option>
+                </select>
+                </div>
+                <div class="form-group">
+                <label for="curp" class="col-form-label">CURP:</label>
+                <input type="text" class="form-control" id="curp" name="curp">
+                </div>
+                <div class="form-group">
+                <label for="nombre" class="col-form-label">Nombre Compelto:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre">
                 </div>
                 <div class="form-group">
-                <label for="apellidos" class="col-form-label">Apellido Rte:</label>
+                <label for="apellidos" class="col-form-label">Apellidos:</label>
                 <input type="text" class="form-control" id="apellidos" name="apellidos">
+                </div>
+                <div class="form-group">
+                <label for="fh_nacimiento" class="col-form-label">Fecha de Nacimiento:</label>
+                <input type="date" class="form-control" id="fh_nacimiento" name="fh_nacimiento">
                 </div>                
                 <div class="form-group">
                 <label for="ciclo" class="col-form-label">Ciclo Escolar:</label>
@@ -60,13 +74,35 @@
                 </select>
                 </div>
                 <div class="form-group">
-                <label for="periodo" class="col-form-label">Periodo:</label>
-                <select id="periodo" class="form-control" name="periodo">    
+                <label for="deporte" class="col-form-label">Deporte:</label>
+                <select id="deporte" class="form-control" name="deporte">
+                <option value="">Seleccionar...</option>
                 </select>
                 </div>
                 <div class="form-group">
-                <label for="edad" class="col-form-label">Archivo:</label>
-                <input type="file" name="archivo" class="form-control" id="archivo" require">
+                <label for="rama" class="col-form-label">Rama:</label>
+                <select id="rama" class="form-control" name="rama">   
+                <option value="">Seleccionar...</option> 
+                </select>
+                </div>
+                <div class="form-group peso" style="display:none;">
+                <label for="peso" class="col-form-label">Peso:</label>
+                <select id="peso" class="form-control" name="peso">    
+                </select>
+                </div>
+                <div class="form-group categoria" style="display:none;">
+                <label for="categoria" class="col-form-label">Categoria:</label>
+                <select id="categoria" class="form-control" name="categoria">    
+                </select>
+                </div>
+                <div class="form-group prueba" style="display:none;">
+                <label for="prueba" class="col-form-label">Prueba:</label>
+                <select id="prueba" class="form-control" name="prueba">    
+                </select>
+                </div>
+                <div class="form-group">
+                <label for="edad" class="col-form-label">Foto:</label>
+                <input type="file" name="foto" class="form-control" id="foto" require>
                 </div>            
             </div>
             <div class="modal-footer">

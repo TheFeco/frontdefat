@@ -207,7 +207,7 @@ $("#formComentarios").submit(function(e){
 $('#logout').click(function(e){
     e.preventDefault();
     $.ajax({
-        url:"../bd/logout.php",
+        url:baseUrl+"logout.php",
         type:"GET",
         datatype: "json", 
         success:function(data){
@@ -225,11 +225,17 @@ $('#logout').click(function(e){
             datatype: "json", 
             success:function(data){
                 var datos = JSON.parse(data);
-                $.each(datos.ciclo,function(key, ciclo) {
+                $.each(datos.funciones,function(key, funcion) {
+                    $("#funcion").append('<option value='+funcion.id+'>'+funcion.nombre+'</option>');
+                });
+                $.each(datos.ciclos,function(key, ciclo) {
                     $("#ciclo").append('<option value='+ciclo.id+'>'+ciclo.nombre+'</option>');
                 });
-                $.each(datos.periodos,function(key, periodo) {
-                    $("#periodo").append('<option value='+periodo.id+'>'+periodo.nombre+'</option>');
+                $.each(datos.deportes,function(key, deporte) {
+                    $("#deporte").append('<option value='+deporte.id+'>'+deporte.nombre+'</option>');
+                });
+                $.each(datos.ramas,function(key, rama) {
+                    $("#rama").append('<option value='+rama.id+'>'+rama.nombre+'</option>');
                 });
                 //llenaTablaInformes(datos.informes,getRol());
             },
@@ -290,5 +296,61 @@ $('#logout').click(function(e){
          return hasError;
     }
 
+    $('#deporte').change(function(){
+        let key = parseInt($(this).val());
+        $(".categoria").css("display", "none").val("");
+        $(".peso").css("display", "none").val("");
+        $(".prueba").css("display", "none").val("");
+        switch (key) {
+            case 1:
+                getDeporteCampos('getCategorias.php?id='+key,'categoria');
+                break;
+            case 2:
+                getDeporteCampos('getPruebas.php?id='+key,'prueba');
+                break;
+             case 3:
+                getDeporteCampos('getCategorias.php?id='+key,'categoria');
+                break;
+             case 4:
+                break;
+             case 8:
+                getDeporteCampos('getPeso.php?id='+key,'peso');
+                getDeporteCampos('getPruebas.php?id='+key,'prueba');
+                break;
+             case 9:
+                getDeporteCampos('getCategorias.php?id='+key,'categoria');
+                break;
+        }
+    });
+
+    $("#modalInforme").on('hide.bs.modal', function () {
+        //actions you want to perform after modal is closed.
+        $(".categoria").css("display", "none").val("");
+        $(".peso").css("display", "none").val("");
+        $(".prueba").css("display", "none").val("");
+    });
+
+    function getDeporteCampos(url,campo){
+        $.ajax({
+            url:baseUrl+url,
+            type:"GET",
+            datatype: "json", 
+            success:function(data){
+                var datos = JSON.parse(data);
+                $.each(datos.datos,function(key, dato) {
+                    $("#"+campo).append('<option value='+dato.id+'>'+dato.nombre+'</option>');
+                });
+                $("."+campo).css("display", "block");
+            },
+            error: function(error) {
+                var error = JSON.parse(error.responseText);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.menssage
+                });
+            }   
+        });
+    }
     
 });
