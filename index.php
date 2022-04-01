@@ -40,6 +40,9 @@
                 </div>
             </form>
         </div>
+        <div class="imagenbaner" img align="left" src="../imagenes/logo1.png" width="120px" top="20px"> >
+
+        </div>
     </div>     
         
         

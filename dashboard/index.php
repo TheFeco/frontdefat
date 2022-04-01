@@ -100,6 +100,11 @@
                 <select id="prueba" class="form-control" name="prueba">    
                 </select>
                 </div>
+                <div class="form-group prueba" style="display:none;">
+                <label for="   " class="col-form-label">Municipio:</label>
+                <select id="prueba" class="form-control" name="prueba">    
+                </select>
+                </div>
                 <div class="form-group">
                 <label for="edad" class="col-form-label">Foto:</label>
                 <input type="file" name="foto" class="form-control" id="foto" require>

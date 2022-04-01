@@ -2,14 +2,17 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-    <div class="sidebar-brand-icon rotate-n-15">
-        <i class="fas fa-laugh-wink"></i>
+    <div >
+        <br>
+    <img align="left" src="../imagenes/logo1.png" width="120px" top="20px"> 
     </div>
-    <div class="sidebar-brand-text mx-3">DTE</div>
-    </a>
-
+    <br>
+  </a>
+ <br>
+ <div>
+</div>
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+    <hr class="sidebar-divider my-4" top="20px">
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
