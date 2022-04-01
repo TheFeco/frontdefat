@@ -18,8 +18,10 @@
     <body>
      
       <div class="container-login">
+      
         <div class="wrap-login">
             <form class="login-form validate-form" id="formLogin" action="" method="post">
+           
                 <span class="login-form-title">LOGIN</span>
                 
                 <div class="wrap-input100" data-validate = "Usuario incorrecto">
@@ -34,17 +36,18 @@
                 
                 <div class="container-login-form-btn">
                     <div class="wrap-login-form-btn">
+                        
                         <div class="login-form-bgbtn"></div>
                         <button type="submit" name="submit" class="login-form-btn">CONECTAR</button>
                     </div>
                 </div>
+                <br>
+                <img class=imagenbaner  src="../imagenes/defat.JPEG"  top="50px">
             </form>
         </div>
-        <div class="imagenbaner" img align="left" src="../imagenes/logo1.png" width="120px" top="20px"> >
-
         </div>
     </div>     
-        
+    </div>
         
      <script src="jquery/jquery-3.3.1.min.js"></script>    
      <script src="bootstrap/js/bootstrap.min.js"></script>    

@@ -56,13 +56,20 @@ button:hover {
   justify-content: center;
   align-items: center;
   padding: 35px;
-  background: -webkit-linear-gradient(to right, #00dbde, #fc00ff);
-  background: linear-gradient(to right, #00dbde, #fc00ff);
+  background: -webkit-linear-gradient(to top,#651D32,#9c1b40);
+  background: linear-gradient(to top, #651D32,#9c1b40);
 }
+.imagenbaner{
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+
 
 .wrap-login {
   width: 400px;
-  background: #eceff1;
+  background: #fff;
   border-radius: 20px;
   overflow: hidden;
   padding: 77px 55px 53px 55px;

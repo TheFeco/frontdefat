@@ -4,7 +4,7 @@
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
     <div >
         <br>
-    <img align="left" src="../imagenes/logo1.png" width="120px" top="20px"> 
+        <img class="imagendefat"  src="../imagenes/defattran.png"  top="50px">
     </div>
     <br>
   </a>
