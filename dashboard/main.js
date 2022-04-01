@@ -315,12 +315,16 @@ $('#logout').click(function(e){
                 break;
              case 8:
                 getDeporteCampos('getPeso.php?id='+key,'peso');
-                getDeporteCampos('getPruebas.php?id='+key,'prueba');
+                // getDeporteCampos('getPruebas.php?id='+key,'prueba');
                 break;
              case 9:
                 getDeporteCampos('getCategorias.php?id='+key,'categoria');
                 break;
         }
+    });
+    $('#peso').change(function(){
+        let id_peso = $(this).val();
+        getDeporteCampos('getPesoPruebas.php?id='+id_peso, 'prueba')
     });
 
     $("#modalInforme").on('hide.bs.modal', function () {
