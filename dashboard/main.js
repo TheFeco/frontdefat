@@ -137,7 +137,7 @@ $("#formInformes").submit(function(e){
     formData.append('METHOD', 'POST');
     if(validar()){ 
         $.ajax({
-            url: "bd/funciones.php",
+            url: baseUrl+"storeRegistro.php",
             type: "POST",
             dataType: "JSON",
             data: formData,
@@ -152,7 +152,8 @@ $("#formInformes").submit(function(e){
                 llenaTablaInformes(datos.informes);       
             },
             error: function(data) {
-                var error = JSON.parse(data);
+                var error = data;
+                console.log(error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -230,6 +231,18 @@ $('#logout').click(function(e){
                 });
                 $.each(datos.ciclos,function(key, ciclo) {
                     $("#ciclo").append('<option value='+ciclo.id+'>'+ciclo.nombre+'</option>');
+                });
+                $.each(datos.cct,function(key, cct) {
+                    $("#cct").append('<option value='+cct.id+'>'+cct.nombre+'</option>');
+                });
+                $.each(datos.turno,function(key, turno) {
+                    $("#turno").append('<option value='+turno.id+'>'+turno.nombre+'</option>');
+                });
+                $.each(datos.municipio,function(key, municipio) {
+                    $("#municipio").append('<option value='+municipio.id+'>'+municipio.nombre+'</option>');
+                });
+                $.each(datos.zona,function(key, zona) {
+                    $("#zona").append('<option value='+zona.id+'>'+zona.nombre+'</option>');
                 });
                 $.each(datos.deportes,function(key, deporte) {
                     $("#deporte").append('<option value='+deporte.id+'>'+deporte.nombre+'</option>');
