@@ -135,8 +135,10 @@ $("#formInformes").submit(function(e){
         
     }
     usuario     = getUsuario();
+    nivel = getNivel();
     formData = new FormData(this);
     formData.append('usuario', usuario);
+    formData.append('nivel', nivel);
     formData.append('METHOD', 'POST');
     if(validar()){ 
         $.ajax({
@@ -149,10 +151,11 @@ $("#formInformes").submit(function(e){
             processData:false,
             success: function(data){
                 var datos = data;
-                $("#modalInforme").modal("hide");
+                console.log(data);
+                // $("#modalInforme").modal("hide");
                 let formulario = document.getElementById('formInformes');
                 formulario.reset();
-                llenaTablaInformes(datos.informes);       
+                // llenaTablaInformes(datos.informes);      
             },
             error: function(data) {
                 var error = data;
@@ -228,6 +231,7 @@ $('#logout').click(function(e){
             type:"GET",
             datatype: "json", 
             success:function(data){
+                console.log(data)
                 var datos = JSON.parse(data);
                 $.each(datos.funciones,function(key, funcion) {
                     $("#funcion").append('<option value='+funcion.id+'>'+funcion.nombre+'</option>');
@@ -237,6 +241,9 @@ $('#logout').click(function(e){
                 });
                 $.each(datos.cct,function(key, cct) {
                     $("#cct").append('<option value='+cct.id+'>'+cct.nombre+'</option>');
+                });
+                $.each(datos.escuela,function(key, cct) {
+                    $("#escuela").append('<option value='+escuela.id+'>'+escuela.nombre+'</option>');
                 });
                 $.each(datos.turno,function(key, turno) {
                     $("#turno").append('<option value='+turno.id+'>'+turno.nombre+'</option>');

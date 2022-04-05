@@ -12,6 +12,10 @@ function getUsuarioNombre(){
     var getUsuario = JSON.parse(window.localStorage.getItem("s_storage"));
     return getUsuario.usuario;
 }
+function getNivel(){
+    var getUsuario = JSON.parse(window.localStorage.getItem("s_storage"));
+    return getUsuario.id_nivel;
+}
 function getRol(){
     var getUsuario = JSON.parse(window.localStorage.getItem("s_storage"));
     return getUsuario.id_rol;

@@ -37,9 +37,12 @@
                 </select>
                 </div>
                 <div class="form-group">
-                <label for="cct" class="col-form-label">Nombre de Escuela:</label>
-                <input type="text"  id="cct" class="form-control" name="cct" />    
-                </select>
+                <label for="cct" class="col-form-label">Clave de Centro de Trabajo:</label>
+                <input type="text"  id="cct" class="form-control" name="cct" /> 
+                </div>
+                <div class="form-group">
+                <label for="escuela" class="col-form-label">Nombre de Escuela:</label>
+                <input type="text"  id="escuela" class="form-control" name="escuela" />    
                 </div>
                 </div>
                 <div class="col-lg-6">           
@@ -99,10 +102,11 @@
                 </div>            
                 </div>
                 </div>
+                <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
                 </form>  
             <div >
 
-                <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
+                <!-- <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button> -->
             </div>
           <br>
         </div>

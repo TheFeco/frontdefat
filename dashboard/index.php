@@ -2,7 +2,7 @@
 
 <!--INICIO del cont principal-->
 <div class="container">
-    <h1>Captura de datos</h1>
+    <h1 align="center">Captura de datos</h1>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">            
