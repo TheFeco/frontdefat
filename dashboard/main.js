@@ -38,14 +38,17 @@ $(document).ready(function(){
     
 
     $("#btnNuevo").click(function(){
-        $("#formInformes").trigger("reset");
-        $(".modal-header").css("color", "white");
-        $(".modal-title").text("Capturar Informe");     
-        $("#modalInforme").modal("show");     
-        id=null;
-        opcion = 4; //alta informe
+        window.location.href ="captura.php"
     });
 
+// $("#btnNuevo").click(function(){
+//         $("#formInformes").trigger("reset");
+//         $(".modal-header").css("color", "white");
+//         $(".modal-title").text("Capturar Informe");     
+//         $("#modalInforme").modal("show");     
+//         id=null;
+//         opcion = 4; //alta informe
+//     });
 //botón BORRAR con modal
 $(document).on("click", ".btnBorrar", function(){    
     fila = $(this);
@@ -238,7 +241,7 @@ $('#logout').click(function(e){
                 $.each(datos.turno,function(key, turno) {
                     $("#turno").append('<option value='+turno.id+'>'+turno.nombre+'</option>');
                 });
-                $.each(datos.municipio,function(key, municipio) {
+                $.each(datos.municipios,function(key, municipio) {
                     $("#municipio").append('<option value='+municipio.id+'>'+municipio.nombre+'</option>');
                 });
                 $.each(datos.zona,function(key, zona) {

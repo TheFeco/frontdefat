@@ -1,11 +1,12 @@
 <?php require_once "vistas/parte_superior.php"?>
 
 <div class="container">
-    <h1>Captura de datos</h1>
+    <h1 align="center">Captura de datos</h1>
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-md-6" >            
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 </button>
                 <form id="formInformes" enctype="multipart/form-data" class="needs-validation" novalidate>  
                 <div class="form-group">
@@ -36,26 +37,29 @@
                 </select>
                 </div>
                 <div class="form-group">
-                <label for="ciclo" class="col-form-label">Nombre de Escuela:</label>
-                <select id="ciclo" class="form-control" name="ciclo">    
+                <label for="cct" class="col-form-label">Nombre de Escuela:</label>
+                <input type="text"  id="cct" class="form-control" name="cct" />    
                 </select>
                 </div>
                 </div>
                 <div class="col-lg-6">           
                 <div class="form-group">
-                <label for="ciclo" class="col-form-label">Turno:</label>
-                <select id="ciclo" class="form-control" name="ciclo">    
+                <label for="turno" class="col-form-label">Turno:</label>
+                <select id="turno" class="form-control" name="turno"> 
+                    <option value="">Seleccionar...</option>   
+                    <option value="1">Matutino</option>   
+                    <option value="2">Vespertino</option>   
                 </select>
                 </div>
                 <div class="form-group">
-                <label for="ciclo" class="col-form-label">Municipio:</label>
-                <select id="ciclo" class="form-control" name="ciclo">    
+                <label for="municipio" class="col-form-label">Municipio:</label>
+                <select id="municipio" class="form-control" name="municipio">
+                    <option value="">Seleccionar...</option> 
                 </select>
                 </div>
                 <div class="form-group">
-                <label for="ciclo" class="col-form-label">Zona:</label>
-                <select id="ciclo" class="form-control" name="ciclo">    
-                </select>
+                <label for="zona" class="col-form-label">Zona:</label>
+                <input type="number" class="form-control" min="0" max="130" id="zona" name="zona"/>
                 </div>
                 <div class="form-group">
                 <label for="deporte" class="col-form-label">Deporte:</label>
@@ -97,10 +101,10 @@
                 </div>
                 </form>  
             <div >
-                
+
                 <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
             </div>
-         
+          <br>
         </div>
     </div>
     
