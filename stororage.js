@@ -1,5 +1,5 @@
 var miStorage = window.localStorage;
-//const baseUrl = 'http://apidefat.test/';
+// const baseUrl = 'http://apidefat.test/';
 const baseUrl = 'http://dtesepyc.gob.mx/apidefat/';
 //var getUsuario = JSON.parse(window.localStorage.getItem("s_storage"));
 //const getUsuario = getUser();

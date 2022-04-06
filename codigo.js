@@ -5,7 +5,7 @@ $(document).ready(function(){
             // window.location.href = "vistas/pag_inicio.php";
             window.location.href = "dashboard/index.php";
         }else{
-            window.location.href = "dashboard/index.php";
+            window.location.href = "dashboardad/index.php";
         }
       }
 });
@@ -38,7 +38,7 @@ $('#formLogin').submit(function(e){
                    if(getRol() != 1){
                     url = "dashboard/index.php";
                    }else{
-                    url = "dashboard/index.php";
+                    url = "dashboardad/index.php";
                    }
                    Swal.fire({
                        type:'success',
