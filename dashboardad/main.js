@@ -45,7 +45,7 @@ $("#formBuscarDeportistas").submit(function(e){
     formData.append('METHOD', 'POST');
     if(validar()){ 
         $.ajax({
-            url: baseUrl+"storeRegistro.php",
+            url: baseUrl+"getAdminData.php",
             type: "POST",
             dataType: "JSON",
             data: formData,
@@ -54,10 +54,14 @@ $("#formBuscarDeportistas").submit(function(e){
             processData:false,
             success: function(data){
                 var datos = data;
-                // $("#modalInforme").modal("hide");
-                let formulario = document.getElementById('formInformes');
-                formulario.reset();
-                // llenaTablaInformes(datos.informes);      
+                // let formulario = document.getElementById('formBuscarDeportistas');
+                // formulario.reset();
+                if(datos.data.length != 0){
+                    llenaTablaInformes(datos.data);
+                }else{
+                    $('#tablaPersonas tbody').empty();
+                }
+                      
             },
             error: function(data) {
                 var error = data;
@@ -95,7 +99,7 @@ $('#logout').click(function(e){
             success:function(data){
                 var datos = JSON.parse(data);
                 $.each(datos.usuarios,function(key, usuario) {
-                    $("#usuarios").append('<option value='+usuario.id+'>'+usuario.nombre+'</option>');
+                    $("#usuario").append('<option value='+usuario.id+'>'+usuario.nombre+'</option>');
                 });
                 $.each(datos.funciones,function(key, funcion) {
                     $("#funcion").append('<option value='+funcion.id+'>'+funcion.nombre+'</option>');
@@ -136,38 +140,21 @@ $('#logout').click(function(e){
          });
     } 
 
-    function llenaTablaInformes(data, rol){
+    function llenaTablaInformes(data){
         var html;
-        if(rol != 1){
-            $.each(data,function(key, informe) {
-                html += '<tr>' +
-                '<td class = "d-none" id="'+informe.id+'">' + informe.id + '</td>' +
-                '<td>' + informe.nombre_rte +' '+ informe.apellido_rte + '</td>' +
-                '<td>' + informe.ciclo + '</td>' +
-                '<td>' + informe.periodo + '</td>' +
-                '<td class="text-center"><a href="../../' + informe.archivo + '" download>Descargar</a></td>' +
-                '<td>' + informe.create_at + '</td>';
-                if(informe.comentario != null){ 
-                    html += '<td><div class="text-center"><div class="btn-group"><button class="btn btn-primary btnVer" data-comentario="'+informe.comentario+'">Nota</button><button class="btn btn-primary btnComentar user">Comentar</button><button class="btn btn-danger btnBorrar">Borrar</button></div></div></td>';   
-                }else{
-                    html += '<td><div class="text-center"><div class="btn-group"><button class="btn btn-primary btnEditar user">Editar</button><button class="btn btn-primary btnComentar user">Comentar</button><button class="btn btn-danger btnBorrar">Borrar</button></div></div></td>';
-                }
-                html += '</tr>';
-            });
-        }else{
-            $.each(data,function(key, informe) {
-                html += '<tr>' +
-                '<td class = "d-none" id="'+informe.id+'">' + informe.id + '</td>' +
-                '<td >' + informe.cct + '</td>' +
-                '<td>' + informe.nombre_rte +' '+ informe.apellido_rte + '</td>' +
-                '<td>' + informe.ciclo + '</td>' +
-                '<td>' + informe.periodo + '</td>' +
-                '<td class="text-center"><a href="../../' + informe.archivo + '" download>Descargar</a></td>' +
-                '<td>' + informe.create_at + '</td>';
-                html += '<td><div class="text-center"><div class="btn-group"><button class="btn btn-primary btnComentar" data-comentario="'+informe.comentario+'">Comentar</button><button class="btn btn-danger btnBorrar">Borrar</button></div></div></td>';
-                html += '</tr>';
-            });
-        }
+        $.each(data,function(key, informe) {
+            var deprote = (informe.deporte == null) ? "" : informe.deporte;
+            html += '<tr>' +
+            '<td class = "d-none" id="'+informe.id+'">' + informe.id + '</td>' +
+            '<td >' + informe.escuela + '</td>' +
+            '<td>' + informe.ciclo + '</td>' +
+            '<td>' + informe.turno + '</td>' +
+            '<td>' + informe.funcion + '</td>' +
+            '<td>' + deprote + '</td>' +
+            '<td>' + informe.rama + '</td>';
+            // html += '<td><div class="text-center"><div class="btn-group"><button class="btn btn-primary btnComentar" data-comentario="'+informe.comentario+'">Comentar</button><button class="btn btn-danger btnBorrar">Borrar</button></div></div></td>';
+            html += '</tr>';
+        });
         $('#DataResult').html(html);
     }
 
@@ -175,7 +162,7 @@ $('#logout').click(function(e){
         var hasError =true
         $('#formBuscarDeportistas input, #formBuscarDeportistas select').each(function (){
             var input = $(this);
-            if(input.val() == ""){
+            if(input.val() == "" && input.hasClass("requerido")){
 
                 input.addClass('is-invalid');
             }
@@ -187,6 +174,16 @@ $('#logout').click(function(e){
         }
          return hasError;
     }
+    $('#funcion').change(function(){
+        $("deporte").val("");
+        $("#rama").val("");
+        $(".categoria").css("display", "none");
+        $("#categoria").val("");
+        $(".peso").css("display", "none");
+        $("#peso").val("");
+        $(".prueba").css("display", "none");
+        $("#prueba").val("");
+    });
 
     $('#deporte').change(function(){
         let key = parseInt($(this).val());
@@ -206,13 +203,21 @@ $('#logout').click(function(e){
              case 4:
                 break;
              case 8:
-                getDeporteCampos('getPeso.php?id='+key,'peso');
-                // getDeporteCampos('getPruebas.php?id='+key,'prueba');
+                // getDeporteCampos('getPeso.php?id_deporte='+key,'peso');
                 break;
              case 9:
                 getDeporteCampos('getCategorias.php?id='+key,'categoria');
                 break;
         }
+    });
+    $('#rama').change(function(){
+        let id_usuario = $('#usuario').val();
+        let id_deporte = $('#deporte').val();
+        let id_rama = $(this).val();
+        if(id_deporte == 8 && id_usuario != '' && id_rama != ''){
+            getDeporteCampos('getPeso.php?id_deporte='+id_deporte+'&id_usuario='+id_usuario+'&id_rama='+id_rama, 'peso');
+        }
+        
     });
     $('#peso').change(function(){
         let id_peso = $(this).val();
@@ -240,8 +245,11 @@ $('#logout').click(function(e){
             type:"GET",
             datatype: "json", 
             success:function(data){
+                $("#"+campo).empty();
+                $("#"+campo).append('<option value="">Seleccionar...</option>');
                 var datos = JSON.parse(data);
                 $.each(datos.datos,function(key, dato) {
+                   
                     $("#"+campo).append('<option value='+dato.id+'>'+dato.nombre+'</option>');
                 });
                 $("."+campo).css("display", "block");

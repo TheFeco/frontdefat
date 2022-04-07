@@ -8,20 +8,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
-                    <label for="usuarios" class="col-form-label">Jefe de sector:</label>        
-                    <select id="usuarios" class="form-control" name="usuarios">
+                    <label for="usuarios" class="col-form-label">Jefe de zona:</label>        
+                    <select id="usuario" class="form-control requerido" name="usuario">
                         <option value="">Seleccionar...</option>
                     </select> 
                 </div>  
                 <div class="col-lg-4">
                     <label for="ciclos" class="col-form-label">Ciclos:</label>          
-                    <select id="ciclo" class="form-control" name="ciclo">
+                    <select id="ciclo" class="form-control requerido" name="ciclo">
                         <option value="">Seleccionar...</option>
                     </select> 
                 </div>  
                 <div class="col-lg-4">
                     <label for="funciones" class="col-form-label">Funciones:</label>          
-                    <select id="funcion" class="form-control" name="funcion">
+                    <select id="funcion" class="form-control requerido" name="funcion">
                         <option value="">Seleccionar...</option>
                     </select> 
                 </div>  
@@ -41,19 +41,19 @@
                         <option value="">Seleccionar...</option>
                     </select> 
                 </div>  
-                <div class="col-lg-2">   
+                <div class="col-lg-2 categoria" style="display: none;">   
                     <label for="categorias" class="col-form-label">Categorias:</label>         
                     <select id="categoria" class="form-control" name="categoria">
                         <option value="">Seleccionar...</option>
                     </select> 
                 </div>  
-                <div class="col-lg-2">
+                <div class="col-lg-2 peso" style="display: none;">
                     <label for="peso" class="col-form-label">Peso:</label>
                     <select id="peso" class="form-control" name="peso">
                         <option value="">Seleccionar...</option>
                     </select> 
                 </div> 
-                <div class="col-lg-2">
+                <div class="col-lg-2 prueba" style="display: none;">
                     <label for="pruebas" class="col-form-label">Pruebas:</label>         
                     <select id="prueba" class="form-control" name="prueba">
                         <option value="">Seleccionar...</option>
@@ -74,7 +74,7 @@
     <div class="container">
         <div class="row">
                 <div class="col-lg-12">
-                    <div class="table-responsive">        
+                    <div class="table-responsive mb-5">        
                         <table id="tablaPersonas" class="table table-striped table-bordered table-condensed" style="width:100%">
                         <thead class="text-center">
                             <tr>
@@ -82,9 +82,9 @@
                                 <th>Escuela</th>
                                 <th>Ciclo</th>                                
                                 <th>Turno</th>
-                                <th>Documento</th>
-                                <th>Fecha envio</th>
-                                <th>Acciones</th>
+                                <th>Funcion</th>
+                                <th>Deporte</th>
+                                <th>Rama</th>
                             </tr>
                         </thead>
                         <tbody id="DataResult">
