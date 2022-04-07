@@ -16,12 +16,12 @@
     </head>
     
     <body>
-     
+    
       <div class="container-login">
-      
+      <img class=juegos  src="../imagenes/juegos.png"  top="50px">
         <div class="wrap-login">
             <form class="login-form validate-form" id="formLogin" action="" method="post">
-           
+            <img class=imagenbaner  src="../imagenes/defat.JPEG"  top="50px">
                 <span class="login-form-title">LOGIN</span>
                 
                 <div class="wrap-input100" data-validate = "Usuario incorrecto">

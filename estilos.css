@@ -65,11 +65,17 @@ button:hover {
   height: 100%;
   align-items: center;
 }
-
+.juegos{
+  width: 80%;
+  height: 100%;
+  align-items: center;
+  padding: 15px 55px 53px 55px;
+  
+}
 
 
 .wrap-login {
-  width: 400px;
+  width: 490px;
   background: #fff;
   border-radius: 20px;
   overflow: hidden;
