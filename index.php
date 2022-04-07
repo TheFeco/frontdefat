@@ -5,7 +5,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Login con  PHP - Bootstrap 4</title>
+        <title>DEFAYT</title>
 
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="estilos.css">
@@ -18,10 +18,12 @@
     <body>
     
       <div class="container-login">
-      <img class=juegos  src="../imagenes/juegos.png"  top="50px">
+      <div style="padding: 0 25%;" >
+      <img class=juegos  src="../imagenes/juegos2.png"  top="50px">
+    </div>
         <div class="wrap-login">
             <form class="login-form validate-form" id="formLogin" action="" method="post">
-            <img class=imagenbaner  src="../imagenes/defat.JPEG"  top="50px">
+            <img class=imagenbaner  src="../imagenes/baner2.png"  top="10px">
                 <span class="login-form-title">LOGIN</span>
                 
                 <div class="wrap-input100" data-validate = "Usuario incorrecto">
@@ -30,7 +32,7 @@
                 </div>
                 
                 <div class="wrap-input100" data-validate="Password incorrecto">
-                    <input class="input100" type="password" id="password" name="password" placeholder="Password">
+                    <input class="input100" type="password" id="password" name="password" placeholder="Contraseña">
                     <span class="focus-efecto"></span>
                 </div>
                 
@@ -42,7 +44,7 @@
                     </div>
                 </div>
                 <br>
-                <img class=imagenbaner  src="../imagenes/defat.JPEG"  top="50px">
+                <img class=imagenbaner  src="../imagenes/baner2.png"  top="50px">
             </form>
         </div>
         </div>
