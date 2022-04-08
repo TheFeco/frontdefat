@@ -18,12 +18,11 @@
                         <table id="tablaPersonas" class="table table-striped table-bordered table-condensed" style="width:100%">
                         <thead class="text-center">
                             <tr>
-                                <th class="d-none">id</th>
                                 <th>Nombre</th>
                                 <th>Ciclo</th>                                
-                                <th>Periodo</th>
-                                <th>Documento</th>
-                                <th>Fecha envio</th>
+                                <th>Funcion</th>
+                                <th>Deporte</th>
+                                <th>rama</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>

@@ -43,14 +43,14 @@ $(document).ready(function(){
 
 // submit
 $("#formInformes").submit(function(e){
-    e.preventDefault();   
+    e.preventDefault();
     array1 = [1 ,2, 4 ];
     array2 = [1, 2]; 
     var nombre  = $.trim($("#formInformes #nombre").val());
-    curp        =$.trim($("#formInformes #curp").val());
+    curp        = $.trim($("#formInformes #curp").val());
     apellidos   = $.trim($("#formInformes #apellidos").val());
     ciclo       = parseInt($("#formInformes #ciclo").val());
-    escuela     =  $.trim($("#formInformes #escuela").val());
+    escuela     = $.trim($("#formInformes #escuela").val());
     funcion     = parseInt($("#formInformes #funcion").val());
     deporte     = parseInt($("#deporte").val());
     rama        = parseInt($("#rama").val());
@@ -172,23 +172,7 @@ $("#formInformes").submit(function(e){
             processData:false,
             success: function(data){
                 var datos = data;
-                Swal.fire({
-                    title: '¡Se guardo Exitosamente!',
-                    showDenyButton: true,
-                    showCancelButton: true,
-                    confirmButtonText: 'Guardar Otro',
-                    denyButtonText: `Terminar`,
-                  }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                        let formulario = document.getElementById('formInformes');
-                        formulario.reset();
-                    } else if (result.isDenied) {
-                        // llenaTablaInformes(datos.informes);
-                        window.location.href = "index.php";
-                    }
-                  })
-                
+                $("#modalSuccess").modal('show');            
                       
             },
             error: function(data) {
@@ -265,7 +249,9 @@ $('#logout').click(function(e){
             type:"GET",
             datatype: "json", 
             success:function(data){
+                
                 var datos = JSON.parse(data);
+                console.log(datos.registros )
                 $.each(datos.funciones,function(key, funcion) {
                     $("#funcion").append('<option value='+funcion.id+'>'+funcion.nombre+'</option>');
                 });
@@ -293,7 +279,9 @@ $('#logout').click(function(e){
                 $.each(datos.ramas,function(key, rama) {
                     $("#rama").append('<option value='+rama.id+'>'+rama.nombre+'</option>');
                 });
-                //llenaTablaInformes(datos.informes,getRol());
+                if(datos.registros.length > 0){
+                    llenaTablaInformes(datos.registros);
+                }                
             },
             error: function() {
                 Swal.fire({
@@ -305,38 +293,18 @@ $('#logout').click(function(e){
          });
     } 
 
-    function llenaTablaInformes(data, rol){
+    function llenaTablaInformes(data){
         var html;
-        if(rol != 1){
-            $.each(data,function(key, informe) {
-                html += '<tr>' +
-                '<td class = "d-none" id="'+informe.id+'">' + informe.id + '</td>' +
-                '<td>' + informe.nombre_rte +' '+ informe.apellido_rte + '</td>' +
-                '<td>' + informe.ciclo + '</td>' +
-                '<td>' + informe.periodo + '</td>' +
-                '<td class="text-center"><a href="../../' + informe.archivo + '" download>Descargar</a></td>' +
-                '<td>' + informe.create_at + '</td>';
-                if(informe.comentario != null){ 
-                    html += '<td><div class="text-center"><div class="btn-group"><button class="btn btn-primary btnVer" data-comentario="'+informe.comentario+'">Nota</button><button class="btn btn-primary btnComentar user">Comentar</button><button class="btn btn-danger btnBorrar">Borrar</button></div></div></td>';   
-                }else{
-                    html += '<td><div class="text-center"><div class="btn-group"><button class="btn btn-primary btnEditar user">Editar</button><button class="btn btn-primary btnComentar user">Comentar</button><button class="btn btn-danger btnBorrar">Borrar</button></div></div></td>';
-                }
-                html += '</tr>';
-            });
-        }else{
-            $.each(data,function(key, informe) {
-                html += '<tr>' +
-                '<td class = "d-none" id="'+informe.id+'">' + informe.id + '</td>' +
-                '<td >' + informe.cct + '</td>' +
-                '<td>' + informe.nombre_rte +' '+ informe.apellido_rte + '</td>' +
-                '<td>' + informe.ciclo + '</td>' +
-                '<td>' + informe.periodo + '</td>' +
-                '<td class="text-center"><a href="../../' + informe.archivo + '" download>Descargar</a></td>' +
-                '<td>' + informe.create_at + '</td>';
-                html += '<td><div class="text-center"><div class="btn-group"><button class="btn btn-primary btnComentar" data-comentario="'+informe.comentario+'">Comentar</button><button class="btn btn-danger btnBorrar">Borrar</button></div></div></td>';
-                html += '</tr>';
-            });
-        }
+        $.each(data,function(key, informe) {
+            html += '<tr>' +
+            '<td >' + informe.escuela + '</td>' +
+            '<td>' + informe.ciclo + '</td>' +
+            '<td>' + informe.funcion + '</td>' +
+            '<td>' + informe.deporte + '</td>' +
+            '<td>' + informe.rama + '</td>';
+            html += '<td><div class="text-center"><div class="btn-group">ver</div></div></td>';
+            html += '</tr>';
+        });
         $('#DataResult').html(html);
     }
 
@@ -439,5 +407,13 @@ $('#logout').click(function(e){
             }   
         });
     }
-    
+    $('#btnModalOtro').click(function(){
+        let formulario = document.getElementById('formInformes');
+        formulario.reset();
+        $('#modalSuccess').modal('hide');
+    });
+    $('#btnRegresar').click(function(){
+        $('#modalSuccess').modal('hide');
+        window.location.href ="index.php"
+    });
 });

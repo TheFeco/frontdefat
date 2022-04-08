@@ -78,10 +78,8 @@
                         <table id="tablaPersonas" class="table table-striped table-bordered table-condensed" style="width:100%">
                         <thead class="text-center">
                             <tr>
-                                <th class="d-none">id</th>
                                 <th>Escuela</th>
                                 <th>Ciclo</th>                                
-                                <th>Turno</th>
                                 <th>Funcion</th>
                                 <th>Deporte</th>
                                 <th>Rama</th>

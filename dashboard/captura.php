@@ -105,6 +105,24 @@
           <br>
         </div>
     </div>
-    
+    <!-- Modal HTML -->
+<div id="modalSuccess" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header justify-content-center">
+				<div class="icon-box">
+                    <i class="fas fa-check"></i>
+				</div>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body text-center">
+				<h4>Genial!</h4>	
+				<p>¡Se guardo Exitosamente!.</p>
+				<button class="btn btn-success" id="btnModalOtro"><span>Capturar Otro</span> <i class="fad fa-users"></i></button>
+				<button class="btn btn-return" id="btnRegresar"><span>Regresar</span> <i class="fad fa-arrow-alt-left"></i></button>
+			</div>
+		</div>
+	</div>
+</div> 
    
     <?php require_once "vistas/parte_inferior.php"?>
