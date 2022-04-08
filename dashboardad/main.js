@@ -77,6 +77,85 @@ $("#formBuscarDeportistas").submit(function(e){
     } 
     
 });
+$("#ImprimirCedula").submit(function(e){
+    e.preventDefault();
+    METHOD = "POST";
+    formData = new FormData(this);
+    formData.append('METHOD', 'POST');
+    if(validar()){ 
+        $.ajax({
+            url: baseUrl+"getAdminData.php",
+            type: "POST",
+            dataType: "JSON",
+            data: formData,
+            contentType:false,
+            cache:false,
+            processData:false,
+            success: function(data){
+                var datos = data;
+                // let formulario = document.getElementById('formBuscarDeportistas');
+                // formulario.reset();
+                if(datos.data.length != 0){
+                    llenaTablaInformes(datos.data);
+                }else{
+                    $('#tablaPersonas tbody').empty();
+                }
+                      
+            },
+            error: function(data) {
+                var error = data;
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.menssage
+                });
+            }        
+        });
+        
+    } 
+    
+});
+
+$("#ImprimirGafete").submit(function(e){
+    e.preventDefault();
+    METHOD = "POST";
+    formData = new FormData(this);
+    formData.append('METHOD', 'POST');
+    if(validar()){ 
+        $.ajax({
+            url: baseUrl+"getAdminData.php",
+            type: "POST",
+            dataType: "JSON",
+            data: formData,
+            contentType:false,
+            cache:false,
+            processData:false,
+            success: function(data){
+                var datos = data;
+                // let formulario = document.getElementById('formBuscarDeportistas');
+                // formulario.reset();
+                if(datos.data.length != 0){
+                    llenaTablaInformes(datos.data);
+                }else{
+                    $('#tablaPersonas tbody').empty();
+                }
+                      
+            },
+            error: function(data) {
+                var error = data;
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.menssage
+                });
+            }        
+        });
+        
+    } 
+    
+});
 
 $('#logout').click(function(e){
     e.preventDefault();

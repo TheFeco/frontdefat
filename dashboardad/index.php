@@ -98,8 +98,14 @@
 <!--Modal para Informes-->
 
 <!--Modal para Comenarios-->
-
-    
+<div class="container">
+        <div class="row">
+            <div class="col-md-12" >  
+            <button type="submit" id="btnGuardar" class="btn btn-dark">Imprimir Cedula</button>
+            <button type="submit" id="btnGuardar" class="btn btn-dark">Imprimir gafete</button>
+</div>
+</div>
+</div>
     
 </div>
 <!--FIN del cont principal-->
