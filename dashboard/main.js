@@ -172,9 +172,8 @@ $("#formInformes").submit(function(e){
             processData:false,
             success: function(data){
                 var datos = data;
-                console.log(datos.message);
                 Swal.fire({
-                    title: "¡Se guardo Exitosamente!",
+                    title: '¡Se guardo Exitosamente!',
                     showDenyButton: true,
                     showCancelButton: true,
                     confirmButtonText: 'Guardar Otro',
@@ -394,6 +393,9 @@ $('#logout').click(function(e){
                 $(".rama").css("display", "block");
                 break;
              case 4:
+                $(".deporte").css("display", "block");
+                break;
+            case 6:
                 $(".deporte").css("display", "block");
                 break;
         }
