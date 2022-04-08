@@ -64,13 +64,13 @@
                 <label for="zona" class="col-form-label">Zona:</label>
                 <input type="number" class="form-control" min="0" max="130" id="zona" name="zona"/>
                 </div>
-                <div class="form-group">
+                <div class="form-group deporte">
                 <label for="deporte" class="col-form-label">Deporte:</label>
                 <select id="deporte" class="form-control" name="deporte">
-                <option value="">Seleccionar...</option>
+                    <option value="">Seleccionar...</option> 
                 </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group rama">
                 <label for="rama" class="col-form-label">Rama:</label>
                 <select id="rama" class="form-control" name="rama">   
                 <option value="">Seleccionar...</option> 
@@ -101,8 +101,6 @@
                 <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
                 </form>  
             <div >
-
-                <!-- <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button> -->
             </div>
           <br>
         </div>

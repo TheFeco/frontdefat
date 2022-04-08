@@ -41,77 +41,39 @@ $(document).ready(function(){
         window.location.href ="captura.php"
     });
 
-// $("#btnNuevo").click(function(){
-//         $("#formInformes").trigger("reset");
-//         $(".modal-header").css("color", "white");
-//         $(".modal-title").text("Capturar Informe");     
-//         $("#modalInforme").modal("show");     
-//         id=null;
-//         opcion = 4; //alta informe
-//     });
-//botón BORRAR con modal
-$(document).on("click", ".btnBorrar", function(){    
-    fila = $(this);
-    id = parseInt($(this).closest("tr").find('td:eq(0)').attr('id'));
-    usuario     = getUsuario();
-    METHOD = 'DELETE' //borrar
-    Swal.fire({
-        title: '¿Estas seguro?'+id,
-        text: "¡No podrás revertir esto!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '¡Si, elimínalo!'
-    }).then((result) => {
-        if (result.value) {
-            $.ajax({
-                url: "bd/funciones.php",
-                type: "POST",
-                dataType: "json",
-                data: {METHOD:METHOD, id:id, usuario:usuario},
-                success: function(data){
-                    var datos = data;
-                    llenaTablaInformes(datos.informes, getRol());
-                }
-            });
-        }
-    });  
-});
-
-//botón Comentario
-$(document).on("click", ".btnVer", function(){
-    comentario = $(this).data('comentario');
-    $("#modalComentario #comentario").html(comentario);
-    $("#modalComentario .modal-header").addClass("bg-azul");
-    $("#modalComentario .modal-header").css("color", "white");
-    $("#modalComentario .modal-title").text("Comentarios");            
-    $("#modalComentario").modal("show");
-});
-//botón Comentar
-$(document).on("click", ".btnComentar", function(){
-    comentario = $(this).data('comentario');
-    id = parseInt($(this).closest("tr").find('td:eq(0)').attr('id'));
-    $("#modalComentarios .editor").val(comentario);
-    $("#modalComentarios #id").val(id);
-    $("#modalComentarios .modal-header").addClass("bg-azul");
-    $("#modalComentarios .modal-header").css("color", "white");
-    $("#modalComentarios .modal-title").text("Comentarios");            
-    $("#modalComentarios").modal("show");
-});
 // submit
 $("#formInformes").submit(function(e){
-    e.preventDefault();    
+    e.preventDefault();   
+    array1 = [1 ,2, 4 ];
+    array2 = [1, 2]; 
     var nombre  = $.trim($("#formInformes #nombre").val());
+    curp        =$.trim($("#formInformes #curp").val());
     apellidos   = $.trim($("#formInformes #apellidos").val());
-    ciclo       = $("#formInformes #ciclo").val();
-    periodo     = $("#formInformes #periodo").val();
+    ciclo       = parseInt($("#formInformes #ciclo").val());
+    escuela     =  $.trim($("#formInformes #escuela").val());
+    funcion     = parseInt($("#formInformes #funcion").val());
+    deporte     = parseInt($("#deporte").val());
+    rama        = parseInt($("#rama").val());
+    categoria   = parseInt($("#categoria").val());
+    peso        = parseInt($("#peso").val());
+    prueba      = parseInt($("#prueba").val());
     archivo     = $("#formInformes #archivo").val();
     METHOD = "POST";
+
+    if (!funcion) {
+        $('#formInformes #funcion').addClass('is-invalid');
+     } else {
+        $('#formInformes #funcion').removeClass('is-invalid');
+    }
     if (!nombre) {
         $('#formInformes #nombre').addClass('is-invalid');
      } else {
         $('#formInformes input#nombre').removeClass('is-invalid');
+    }
+    if (!curp) {
+        $('#formInformes #curp').addClass('is-invalid');
+     } else {
+        $('#formInformes input#curp').removeClass('is-invalid');
     }
     if (!apellidos) {
         $('#formInformes #apellidos').addClass('is-invalid');
@@ -123,11 +85,70 @@ $("#formInformes").submit(function(e){
      } else {
         $('#formInformes #ciclo').removeClass('is-invalid');
     }
-    if (!periodo) {
-        $('#formInformes #periodo').addClass('is-invalid');
+    if (!escuela) {
+        $('#formInformes #escuela').addClass('is-invalid');
      } else {
-        $('#formInformes #periodo').removeClass('is-invalid');
-    }    
+        $('#formInformes #escuela').removeClass('is-invalid');
+    }
+
+    if( $.inArray( funcion, array1 ) != -1){
+        if (!deporte) {
+            $('#deporte').addClass('is-invalid');
+         } else {
+            $('#deporte').removeClass('is-invalid');
+        }
+        if( $.inArray( funcion, array2 ) != -1){
+            if (!rama) {
+                $('#rama').addClass('is-invalid');
+             } else {
+                $('#rama').removeClass('is-invalid');
+            }
+            if(funcion == 1){
+                switch (deporte) {
+                    case 1:
+                        if (!categoria) {
+                            $('#categoria').addClass('is-invalid');
+                         } else {
+                            $('#categoria').removeClass('is-invalid');
+                        }
+                        break;
+                    case 2:
+                        if (!prueba) {
+                            $('#prueba').addClass('is-invalid');
+                         } else {
+                            $('#prueba').removeClass('is-invalid');
+                        }
+                        break;
+                    case 3:
+                        if (!categoria) {
+                            $('#cateogira').addClass('is-invalid');
+                         } else {
+                            $('#cateogira').removeClass('is-invalid');
+                        }
+                        break;
+                    case 8:
+                        if (!peso) {
+                            $('#peso').addClass('is-invalid');
+                         } else {
+                            $('#peso').removeClass('is-invalid');
+                        }
+                        if (!prueba) {
+                            $('#prueba').addClass('is-invalid');
+                         } else {
+                            $('#prueba').removeClass('is-invalid');
+                        }
+                        break;
+                    case 9:
+                        if (!categoria) {
+                            $('#cateogira').addClass('is-invalid');
+                         } else {
+                            $('#cateogira').removeClass('is-invalid');
+                        };
+                        break;
+                }
+            }
+        }
+    }  
     if(!archivo){
         $("#formInformes #archivo").addClass('is-invalid');
     }else{
@@ -151,11 +172,25 @@ $("#formInformes").submit(function(e){
             processData:false,
             success: function(data){
                 var datos = data;
-                console.log(data);
-                // $("#modalInforme").modal("hide");
-                let formulario = document.getElementById('formInformes');
-                formulario.reset();
-                // llenaTablaInformes(datos.informes);      
+                console.log(datos.message);
+                Swal.fire({
+                    title: "¡Se guardo Exitosamente!",
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar Otro',
+                    denyButtonText: `Terminar`,
+                  }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        let formulario = document.getElementById('formInformes');
+                        formulario.reset();
+                    } else if (result.isDenied) {
+                        // llenaTablaInformes(datos.informes);
+                        window.location.href = "index.php";
+                    }
+                  })
+                
+                      
             },
             error: function(data) {
                 var error = data;
@@ -231,7 +266,6 @@ $('#logout').click(function(e){
             type:"GET",
             datatype: "json", 
             success:function(data){
-                console.log(data)
                 var datos = JSON.parse(data);
                 $.each(datos.funciones,function(key, funcion) {
                     $("#funcion").append('<option value='+funcion.id+'>'+funcion.nombre+'</option>');
@@ -321,41 +355,63 @@ $('#logout').click(function(e){
 
     $('#deporte').change(function(){
         let key = parseInt($(this).val());
-        $(".categoria").css("display", "none").val("");
-        $(".peso").css("display", "none").val("");
-        $(".prueba").css("display", "none").val("");
+        $(".categoria").css("display", "none");
+        $(".peso").css("display", "none");
+        $(".prueba").css("display", "none");
+        if($('#funcion').val() == 1)
+        {
+            switch (key) {
+                case 1:
+                    getDeporteCampos('getCategorias.php?id='+key,'categoria');
+                    break;
+                case 2:
+                    getDeporteCampos('getPruebas.php?id='+key,'prueba');
+                    break;
+                case 3:
+                    getDeporteCampos('getCategorias.php?id='+key,'categoria');
+                    break;
+                case 4:
+                    break;
+                case 9:
+                    getDeporteCampos('getCategorias.php?id='+key,'categoria');
+                    break;
+            }
+        }
+    });
+    $('#funcion').change(function(){
+        let key = parseInt($(this).val());
+        $(".deporte").css("display", "none");
+        $(".rama").css("display", "none");
+        $(".categoria").css("display", "none");
+        $(".peso").css("display", "none");
+        $(".prueba").css("display", "none");
         switch (key) {
             case 1:
-                getDeporteCampos('getCategorias.php?id='+key,'categoria');
-                break;
+                $(".deporte").css("display", "block");
+                $(".rama").css("display", "block");
             case 2:
-                getDeporteCampos('getPruebas.php?id='+key,'prueba');
-                break;
-             case 3:
-                getDeporteCampos('getCategorias.php?id='+key,'categoria');
+                $(".deporte").css("display", "block");
+                $(".rama").css("display", "block");
                 break;
              case 4:
-                break;
-             case 8:
-                getDeporteCampos('getPeso.php?id='+key,'peso');
-                // getDeporteCampos('getPruebas.php?id='+key,'prueba');
-                break;
-             case 9:
-                getDeporteCampos('getCategorias.php?id='+key,'categoria');
+                $(".deporte").css("display", "block");
                 break;
         }
+    });
+    $('#rama').change(function(){
+        let id_usuario = getUsuario();
+        let id_deporte = $('#deporte').val();
+        let id_rama = $(this).val();
+        if(id_deporte == 8 && id_usuario != '' && id_rama != ''){
+            getDeporteCampos('getPeso.php?id_deporte='+id_deporte+'&id_usuario='+id_usuario+'&id_rama='+id_rama, 'peso');
+        }
+        
     });
     $('#peso').change(function(){
         let id_peso = $(this).val();
         getDeporteCampos('getPesoPruebas.php?id='+id_peso, 'prueba')
     });
 
-    $("#modalInforme").on('hide.bs.modal', function () {
-        //actions you want to perform after modal is closed.
-        $(".categoria").css("display", "none").val("");
-        $(".peso").css("display", "none").val("");
-        $(".prueba").css("display", "none").val("");
-    });
 
     function getDeporteCampos(url,campo){
         $.ajax({
@@ -364,6 +420,8 @@ $('#logout').click(function(e){
             datatype: "json", 
             success:function(data){
                 var datos = JSON.parse(data);
+                $("#"+campo).empty();
+                $("#"+campo).append('<option value="">Seleccionar...</option>');
                 $.each(datos.datos,function(key, dato) {
                     $("#"+campo).append('<option value='+dato.id+'>'+dato.nombre+'</option>');
                 });
