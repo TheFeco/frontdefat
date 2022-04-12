@@ -80,6 +80,7 @@
                             <tr>
                                 <th>Escuela</th>
                                 <th>Ciclo</th>                                
+                                <th>Turno</th>                                
                                 <th>Funcion</th>
                                 <th>Deporte</th>
                                 <th>Rama</th>
@@ -97,12 +98,13 @@
 
 <!--Modal para Comenarios-->
 <div class="container">
-        <div class="row">
-            <div class="col-md-12" >  
-            <button type="submit" id="btnGuardar" class="btn btn-dark">Imprimir Cedula</button>
-            <button type="submit" id="btnGuardar" class="btn btn-dark">Imprimir gafete</button>
-</div>
-</div>
+    <div class="row">
+        <div class="col-md-12" >  
+            <button type="button" id="btnCedula" class="btn btn-success">Imprimir Cedula</button>
+            <button type="button" id="btnGafete" class="btn btn-success">Imprimir Gafete</button>
+            <button type="button" id="btnExcel" class="btn btn-success">Exportar Excel</button>
+        </div>
+    </div>
 </div>
     
 </div>

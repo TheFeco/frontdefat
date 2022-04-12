@@ -77,85 +77,6 @@ $("#formBuscarDeportistas").submit(function(e){
     } 
     
 });
-$("#ImprimirCedula").submit(function(e){
-    e.preventDefault();
-    METHOD = "POST";
-    formData = new FormData(this);
-    formData.append('METHOD', 'POST');
-    if(validar()){ 
-        $.ajax({
-            url: baseUrl+"getAdminData.php",
-            type: "POST",
-            dataType: "JSON",
-            data: formData,
-            contentType:false,
-            cache:false,
-            processData:false,
-            success: function(data){
-                var datos = data;
-                // let formulario = document.getElementById('formBuscarDeportistas');
-                // formulario.reset();
-                if(datos.data.length != 0){
-                    llenaTablaInformes(datos.data);
-                }else{
-                    $('#tablaPersonas tbody').empty();
-                }
-                      
-            },
-            error: function(data) {
-                var error = data;
-                console.log(error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: error.menssage
-                });
-            }        
-        });
-        
-    } 
-    
-});
-
-$("#ImprimirGafete").submit(function(e){
-    e.preventDefault();
-    METHOD = "POST";
-    formData = new FormData(this);
-    formData.append('METHOD', 'POST');
-    if(validar()){ 
-        $.ajax({
-            url: baseUrl+"getAdminData.php",
-            type: "POST",
-            dataType: "JSON",
-            data: formData,
-            contentType:false,
-            cache:false,
-            processData:false,
-            success: function(data){
-                var datos = data;
-                // let formulario = document.getElementById('formBuscarDeportistas');
-                // formulario.reset();
-                if(datos.data.length != 0){
-                    llenaTablaInformes(datos.data);
-                }else{
-                    $('#tablaPersonas tbody').empty();
-                }
-                      
-            },
-            error: function(data) {
-                var error = data;
-                console.log(error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: error.menssage
-                });
-            }        
-        });
-        
-    } 
-    
-});
 
 $('#logout').click(function(e){
     e.preventDefault();
@@ -207,7 +128,6 @@ $('#logout').click(function(e){
                 $.each(datos.ramas,function(key, rama) {
                     $("#rama").append('<option value='+rama.id+'>'+rama.nombre+'</option>');
                 });
-                //llenaTablaInformes(datos.informes,getRol());
             },
             error: function() {
                 Swal.fire({
@@ -223,6 +143,7 @@ $('#logout').click(function(e){
         var html;
         $.each(data,function(key, informe) {
             var deprote = (informe.deporte == null) ? "" : informe.deporte;
+            var rama = (informe.rama == null) ? "" : informe.rama;
             html += '<tr>' +
             '<td class = "d-none" id="'+informe.id+'">' + informe.id + '</td>' +
             '<td >' + informe.escuela + '</td>' +
@@ -230,8 +151,8 @@ $('#logout').click(function(e){
             '<td>' + informe.turno + '</td>' +
             '<td>' + informe.funcion + '</td>' +
             '<td>' + deprote + '</td>' +
-            '<td>' + informe.rama + '</td>';
-            // html += '<td><div class="text-center"><div class="btn-group"><button class="btn btn-primary btnComentar" data-comentario="'+informe.comentario+'">Comentar</button><button class="btn btn-danger btnBorrar">Borrar</button></div></div></td>';
+            '<td>' + rama + '</td>';
+
             html += '</tr>';
         });
         $('#DataResult').html(html);
@@ -343,5 +264,137 @@ $('#logout').click(function(e){
             }   
         });
     }
+
+    $('#btnCedula').on('click', function(){
+        METHOD = "POST";
+        if(validar()){
+            var myData = $("#formBuscarDeportistas").getFormData(METHOD);
+            
+            $.ajax({
+                url: baseUrl+"certificadopdf.php",
+                type: "POST",
+                dataType: "JSON",
+                data: myData,
+                contentType:false,
+                cache:false,
+                processData:false,
+                success: function(data){
+                    var url = window.URL || window.webkitURL;
+                    var a = $("<a />");
+                    // a.attr("download", data.name);
+                    a.attr("href", baseUrl+data.file);
+                    a.attr("target", "_blank")
+                    $("body").append(a);
+                    a[0].click();
+                    // $("body").remove(a);
+                          
+                },
+                error: function(data) {
+                    console.log(error);
+                    Swal.fire({
+                        title: 'Lo sentimos',
+                        text: 'No se encontró información deseada'
+                    });
+                }        
+            });
+        }
+    });
+    $('#btnGafete').on('click', function(){
+        METHOD = "POST";
+        if(validar()){
+            var myData = $("#formBuscarDeportistas").getFormData(METHOD);
+            
+            $.ajax({
+                url: baseUrl+"pdf.php",
+                type: "POST",
+                dataType: "JSON",
+                data: myData,
+                contentType:false,
+                cache:false,
+                processData:false,
+                success: function(data){
+                    if( data.length != 0){
+                        var url = window.URL || window.webkitURL;
+                        var a = $("<a />");
+                        // a.attr("download", data.name);
+                        a.attr("href", baseUrl+data.file);
+                        a.attr("target", "_blank")
+                        $("body").append(a);
+                        a[0].click();
+                        // $("body").remove(a)
+                    }else{
+                        Swal.fire({
+                            title: 'Lo sentimos',
+                            text: 'No se encontró información deseada'
+                        });
+                    }
+                          
+                },
+                error: function(data) {
+                    var error = data;
+                    console.log(error.responseJSON);
+                    console.log(error);
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: error.menssage
+                    });
+                }        
+            });
+        }
+    });
+    $('#btnExcel').on('click', function(){
+        METHOD = "POST";
+        if(validar()){
+            var myData = $("#formBuscarDeportistas").getFormData(METHOD);
+            
+            $.ajax({
+                url: baseUrl+"generarExcel.php",
+                type: "POST",
+                dataType: "JSON",
+                data: myData,
+                contentType:false,
+                cache:false,
+                processData:false,
+                success: function(data){
+                    if( data.length != 0){
+                        var url = window.URL || window.webkitURL;
+                        var a = $("<a />");
+                        // a.attr("download", data.name);
+                        a.attr("href", baseUrl+data.file);
+                        a.attr("target", "_blank")
+                        $("body").append(a);
+                        a[0].click();
+                        // $("body").remove(a)
+                    }else{
+                        Swal.fire({
+                            title: 'Lo sentimos',
+                            text: 'No se encontró información deseada'
+                        });
+                    }
+                          
+                },
+                error: function (error) {
+                    console.log(error);
+                    Swal.fire({
+                        title: 'Lo sentimos',
+                        text: 'Hubo un error al obtener los datos'
+                    });
+                }    
+            });
+        }
+    });
+    
+    $.fn.getFormData = function(metodo){
+        data = new FormData();
+        var dataArray = $(this).serializeArray();
+        for(var i=0;i<dataArray.length;i++){
+            if(dataArray[i].value != ''){
+                data.append( dataArray[i].name,dataArray[i].value);
+            }
+        }
+        data.append('METHOD', metodo);
+        return data;
+      }
     
 });
