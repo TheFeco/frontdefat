@@ -61,6 +61,7 @@
   <script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
   <script src="../../stororage.js"></script>
   <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="deportistas.js"></script>
 
 </body>
 

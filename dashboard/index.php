@@ -140,4 +140,5 @@
     
 </div>
 <!--FIN del cont principal-->
+<?php require_once "vistas/modalLarge.php"?>
 <?php require_once "vistas/parte_inferior.php"?>

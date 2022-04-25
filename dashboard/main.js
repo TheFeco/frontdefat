@@ -181,7 +181,7 @@ $("#formInformes").submit(function(e){
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: error.menssage
+                    text: 'Error al obtener los datos'
                 });
             }        
         });
@@ -229,18 +229,59 @@ $("#formComentarios").submit(function(e){
     
 });
 
-$('#logout').click(function(e){
-    e.preventDefault();
-    $.ajax({
-        url:baseUrl+"logout.php",
-        type:"GET",
-        datatype: "json", 
-        success:function(data){
-            localStorage.removeItem('s_storage')
-            window.location.href = "../index.php";
-        }    
-     });     
-}); 
+    $('#logout').click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url:baseUrl+"logout.php",
+            type:"GET",
+            datatype: "json", 
+            success:function(data){
+                localStorage.removeItem('s_storage')
+                window.location.href = "../index.php";
+            }    
+        });     
+    });
+
+    $(document).on("click", ".btnVer", function(){
+        id_ciclo = $(this).data('id_ciclo');
+        id_funcion = $(this).data('id_funcion');
+        id_deporte = $(this).data('id_deporte');
+        id_rama = $(this).data('id_rama');
+        $(".bd-example-modal-lg").modal("show");
+        let url = "getDeportistas.php?id_usuario="+getUsuario()+"&id_ciclo="+id_ciclo+"&id_funcion="+id_funcion+'&id_deporte='+id_deporte+'&id_rama='+id_rama;
+        $.ajax({
+            url:baseUrl+url,
+            type:"GET",
+            datatype: "json", 
+            success:function(data){
+                var datos = JSON.parse(data);
+                var html;
+                $.each(datos.registros,function(key, informe) {
+                    var deporte = (informe.deporte == null) ? "" : informe.deporte;
+                    var rama = (informe.rama == null) ? "" : informe.rama;
+                    html += '<tr>' +
+                    '<td >' + informe.escuela + '</td>' +
+                    '<td>' + informe.ciclo + '</td>' +
+                    '<td>' + informe.nombre + '</td>' +
+                    '<td>' + informe.apellidos + '</td>' +
+                    '<td>' + informe.funcion + '</td>' +
+                    '<td>' + deporte + '</td>' +
+                    '<td>' + rama + '</td>'+
+                    '<td>' + informe.array_pruebas + '</td>';
+                    html += '</tr>';
+                });
+                $('#DataDeportistas').html(html);
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Hubo un error al obtener los datos!'
+                });
+            }   
+         });
+    });
+
     // funciones
     function getData(){
         let url = (getRol() != 1) ? "funciones.php?id="+getUsuario(): "funciones.php";
@@ -251,7 +292,6 @@ $('#logout').click(function(e){
             success:function(data){
                 
                 var datos = JSON.parse(data);
-                console.log(datos.registros )
                 $.each(datos.funciones,function(key, funcion) {
                     $("#funcion").append('<option value='+funcion.id+'>'+funcion.nombre+'</option>');
                 });
@@ -281,6 +321,7 @@ $('#logout').click(function(e){
                 });
                 if(datos.registros.length > 0){
                     llenaTablaInformes(datos.registros);
+                    
                 }                
             },
             error: function() {
@@ -295,14 +336,17 @@ $('#logout').click(function(e){
 
     function llenaTablaInformes(data){
         var html;
+    
         $.each(data,function(key, informe) {
+            var deporte = (informe.deporte == null) ? "" : informe.deporte;
+            var rama = (informe.rama == null) ? "" : informe.rama;
             html += '<tr>' +
             '<td >' + informe.escuela + '</td>' +
             '<td>' + informe.ciclo + '</td>' +
             '<td>' + informe.funcion + '</td>' +
-            '<td>' + informe.deporte + '</td>' +
-            '<td>' + informe.rama + '</td>';
-            html += '<td><div class="text-center"><div class="btn-group">ver</div></div></td>';
+            '<td>' + deporte + '</td>' +
+            '<td>' + rama + '</td>';
+            html += '<td><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-info btnVer" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'" data-id_rama="'+informe.id_rama+'">VER</button></div></div></td>';
             html += '</tr>';
         });
         $('#DataResult').html(html);
