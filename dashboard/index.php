@@ -22,7 +22,7 @@
                                 <th>Ciclo</th>                                
                                 <th>Funcion</th>
                                 <th>Deporte</th>
-                                <th>rama</th>
+                                <th>Rama</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
