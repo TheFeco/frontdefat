@@ -152,7 +152,7 @@ $('#logout').click(function(e){
             '<td>' + informe.funcion + '</td>' +
             '<td>' + deprote + '</td>' +
             '<td>' + rama + '</td>';
-
+            html += '<td><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-info btnVer" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'" data-id_rama="'+informe.id_rama+'">VER</button></div></div></td>';
             html += '</tr>';
         });
         $('#DataResult').html(html);
@@ -279,14 +279,11 @@ $('#logout').click(function(e){
                 cache:false,
                 processData:false,
                 success: function(data){
-                    var url = window.URL || window.webkitURL;
                     var a = $("<a />");
-                    // a.attr("download", data.name);
                     a.attr("href", baseUrl+data.file);
                     a.attr("target", "_blank")
                     $("body").append(a);
                     a[0].click();
-                    // $("body").remove(a);
                           
                 },
                 error: function(data) {
@@ -314,14 +311,11 @@ $('#logout').click(function(e){
                 processData:false,
                 success: function(data){
                     if( data.length != 0){
-                        var url = window.URL || window.webkitURL;
                         var a = $("<a />");
-                        // a.attr("download", data.name);
                         a.attr("href", baseUrl+data.file);
                         a.attr("target", "_blank")
                         $("body").append(a);
                         a[0].click();
-                        // $("body").remove(a)
                     }else{
                         Swal.fire({
                             title: 'Lo sentimos',
@@ -358,14 +352,11 @@ $('#logout').click(function(e){
                 processData:false,
                 success: function(data){
                     if( data.length != 0){
-                        var url = window.URL || window.webkitURL;
                         var a = $("<a />");
-                        // a.attr("download", data.name);
                         a.attr("href", baseUrl+data.file);
                         a.attr("target", "_blank")
                         $("body").append(a);
                         a[0].click();
-                        // $("body").remove(a)
                     }else{
                         Swal.fire({
                             title: 'Lo sentimos',
@@ -384,6 +375,46 @@ $('#logout').click(function(e){
             });
         }
     });
+
+    $(document).on("click", ".btnVer", function(){
+        id_ciclo = $(this).data('id_ciclo');
+        id_funcion = $(this).data('id_funcion');
+        id_deporte = $(this).data('id_deporte');
+        id_rama = $(this).data('id_rama');
+        $(".bd-example-modal-lg").modal("show");
+        let url = "getDeportistas.php?id_usuario="+getUsuario()+"&id_ciclo="+id_ciclo+"&id_funcion="+id_funcion+'&id_deporte='+id_deporte+'&id_rama='+id_rama;
+        $.ajax({
+            url:baseUrl+url,
+            type:"GET",
+            datatype: "json", 
+            success:function(data){
+                var datos = JSON.parse(data);
+                var html;
+                $.each(datos.registros,function(key, informe) {
+                    var deporte = (informe.deporte == null) ? "" : informe.deporte;
+                    var rama = (informe.rama == null) ? "" : informe.rama;
+                    html += '<tr>' +
+                    '<td >' + informe.escuela + '</td>' +
+                    '<td>' + informe.ciclo + '</td>' +
+                    '<td>' + informe.nombre + '</td>' +
+                    '<td>' + informe.apellidos + '</td>' +
+                    '<td>' + informe.funcion + '</td>' +
+                    '<td>' + deporte + '</td>' +
+                    '<td>' + rama + '</td>'+
+                    '<td>' + informe.array_pruebas + '</td>';
+                    html += '</tr>';
+                });
+                $('#DataDeportistas').html(html);
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Hubo un error al obtener los datos!'
+                });
+            }   
+         });
+    });
     
     $.fn.getFormData = function(metodo){
         data = new FormData();
@@ -395,6 +426,6 @@ $('#logout').click(function(e){
         }
         data.append('METHOD', metodo);
         return data;
-      }
+    }
     
 });

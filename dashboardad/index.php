@@ -84,6 +84,7 @@
                                 <th>Funcion</th>
                                 <th>Deporte</th>
                                 <th>Rama</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="DataResult">
@@ -111,4 +112,5 @@
     
 </div>
 <!--FIN del cont principal-->
+<?php require_once "vistas/modalLarge.php"?>
 <?php require_once "vistas/parte_inferior.php"?>
