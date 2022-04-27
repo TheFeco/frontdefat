@@ -467,6 +467,7 @@ function curpValida(curp) {
         validado = curp.match(re);
     
     if (!validado)  //Coincide con el formato general?
+    
         return false;
     
     //Validar que coincida el dígito verificador
@@ -487,3 +488,34 @@ function curpValida(curp) {
         
     return true; //Validado
 }
+$('#Curp').change( function(){
+    var curp = $('#Curp').val(),
+    resultado = document.getElementById("resultado"),
+    valido = "No válido";
+    //Valdiamos si esta lleno el campo
+    if(!$('#Curp').inputmask("isComplete")){
+        //mostrar mensaje de curp incompleta
+        swal({
+            title: "Datos insuficientes",
+            text: "Favor de proprocionar los 18 caracteres de la curp!",
+            icon: "warning",
+            button: "salir",
+          });
+        resultado.classList.remove("ok");
+    }else{
+        //Valdiamos la curp si esta escrita bien por renapo
+        if (curpValida(curp)) {
+            curpExiste(curp);
+            
+        } else {
+            resultado.classList.remove("ok");
+            //Muesta mensaje si la curp esta escrita mal
+            swal({
+                title: "Lo sentimos",
+                text: "La curp proporcionada es erronea favor de consultarla",
+                icon: "warning",
+                button: "salir",
+              });
+        }
+    }
+    });
