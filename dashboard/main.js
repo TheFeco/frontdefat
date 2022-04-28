@@ -253,12 +253,13 @@ $("#formComentarios").submit(function(e){
     });
 
     $(document).on("click", ".btnVer", function(){
+        cct = $(this).data('cct');
         id_ciclo = $(this).data('id_ciclo');
         id_funcion = $(this).data('id_funcion');
         id_deporte = $(this).data('id_deporte');
         id_rama = $(this).data('id_rama');
         $(".bd-example-modal-lg").modal("show");
-        let url = "getDeportistas.php?id_usuario="+getUsuario()+"&id_ciclo="+id_ciclo+"&id_funcion="+id_funcion+'&id_deporte='+id_deporte+'&id_rama='+id_rama;
+        let url = "getDeportistas.php?id_usuario="+getUsuario()+"&id_ciclo="+id_ciclo+"&id_funcion="+id_funcion+'&id_deporte='+id_deporte+'&id_rama='+id_rama+'&cct='+cct;
         $.ajax({
             url:baseUrl+url,
             type:"GET",
@@ -356,7 +357,7 @@ $("#formComentarios").submit(function(e){
             '<td>' + informe.funcion + '</td>' +
             '<td>' + deporte + '</td>' +
             '<td>' + rama + '</td>';
-            html += '<td><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-info btnVer" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'" data-id_rama="'+informe.id_rama+'">VER</button></div></div></td>';
+            html += '<td><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-info btnVer" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'" data-id_rama="'+informe.id_rama+'">VER</button></div></div></td>';
             html += '</tr>';
         });
         $('#DataResult').html(html);
