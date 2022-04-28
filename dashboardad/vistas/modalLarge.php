@@ -16,6 +16,7 @@
                                     <th>Deporte</th>
                                     <th>Rama</th>
                                     <th>Pruebas</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="DataDeportistas">

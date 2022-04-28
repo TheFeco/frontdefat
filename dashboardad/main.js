@@ -152,7 +152,7 @@ $('#logout').click(function(e){
             '<td>' + informe.funcion + '</td>' +
             '<td>' + deprote + '</td>' +
             '<td>' + rama + '</td>';
-            html += '<td><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-info btnVer" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'" data-id_rama="'+informe.id_rama+'">VER</button></div></div></td>';
+            html += '<td><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-info btnVer" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'"   data-id_zona="'+informe.id_zona+'" data-id_rama="'+informe.id_rama+'">VER</button></div></div></td>';
             html += '</tr>';
         });
         $('#DataResult').html(html);
@@ -377,12 +377,14 @@ $('#logout').click(function(e){
     });
 
     $(document).on("click", ".btnVer", function(){
+        cct = $(this).data('cct');
+        id_usuario = $(this).data('id_zona');
         id_ciclo = $(this).data('id_ciclo');
         id_funcion = $(this).data('id_funcion');
         id_deporte = $(this).data('id_deporte');
         id_rama = $(this).data('id_rama');
         $(".bd-example-modal-lg").modal("show");
-        let url = "getDeportistas.php?id_usuario="+getUsuario()+"&id_ciclo="+id_ciclo+"&id_funcion="+id_funcion+'&id_deporte='+id_deporte+'&id_rama='+id_rama;
+        let url = "getDeportistas.php?id_usuario="+id_usuario+"&id_ciclo="+id_ciclo+"&id_funcion="+id_funcion+'&id_deporte='+id_deporte+'&id_rama='+id_rama+'&cct='+cct;
         $.ajax({
             url:baseUrl+url,
             type:"GET",
@@ -402,6 +404,7 @@ $('#logout').click(function(e){
                     '<td>' + deporte + '</td>' +
                     '<td>' + rama + '</td>'+
                     '<td>' + informe.array_pruebas + '</td>';
+                    html += '<td><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-danger btnDelete" data-id="'+informe.id+'">Borrar</button></div></div></td>';
                     html += '</tr>';
                 });
                 $('#DataDeportistas').html(html);
@@ -426,6 +429,41 @@ $('#logout').click(function(e){
         }
         data.append('METHOD', metodo);
         return data;
+    }
+
+    $(document).on("click", ".btnDelete", function(){
+        var id = $(this).data('id');
+        Swal.fire({
+            title: 'Usted Desea eliminar este registro?',
+            text: "¡No podrás revertir esto!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Sí, bórralo!'
+        }).then((result) => {
+            if (result.value) {
+                deleteDeportista(id);
+            }
+        })
+    });
+    function deleteDeportista(id){
+        METHOD = "DELETE";
+        formData = new FormData();
+        formData.append('METHOD', METHOD);
+        let url = "deleteRegistro.php?id="+id;
+        $.ajax({
+            url: baseUrl+url,
+            type: "POST",
+            dataType: "json",
+            data: formData,
+            contentType:false,
+            cache:false,
+            processData:false,
+            success: function(){
+                $(".bd-example-modal-lg").modal("hide");
+            }
+        });
     }
     
 });

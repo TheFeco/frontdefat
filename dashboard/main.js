@@ -155,6 +155,16 @@ $("#formInformes").submit(function(e){
         $('#formInformes #archivo').removeClass('is-invalid');
         
     }
+    if ($('#cct').inputmask('isComplete')) {
+        $('#cct').removeClass('is-invalid');
+    }else{
+        $('#cct').addClass('is-invalid');
+    }
+    if(curpValida(curp.toUpperCase())){
+        $('#curp').removeClass('is-invalid');
+    }else{
+        $('#curp').addClass('is-invalid');
+    }
     usuario     = getUsuario();
     nivel = getNivel();
     formData = new FormData(this);
@@ -460,62 +470,69 @@ $("#formComentarios").submit(function(e){
         $('#modalSuccess').modal('hide');
         window.location.href ="index.php"
     });
-});
-//Validador de curp
-function curpValida(curp) {
-    var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0\d|1[0-2])(?:[0-2]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
-        validado = curp.match(re);
-    
-    if (!validado)  //Coincide con el formato general?
-    
-        return false;
-    
-    //Validar que coincida el dígito verificador
-    function digitoVerificador(curp17) {
-        //Fuente https://consultas.curp.gob.mx/CurpSP/
-        var diccionario  = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
-            lngSuma      = 0.0,
-            lngDigito    = 0.0;
-        for(var i=0; i<17; i++)
-            lngSuma= lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
-        lngDigito = 10 - lngSuma % 10;
-        if(lngDigito == 10)
-            return 0;
-        return lngDigito;
-    }
-    if (validado[2] != digitoVerificador(validado[1])) 
-        return false;
+
+    //Validador de curp
+    function curpValida(curp) {
+        var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0\d|1[0-2])(?:[0-2]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
+            validado = curp.match(re);
         
-    return true; //Validado
-}
-$('#Curp').change( function(){
-    var curp = $('#Curp').val(),
-    resultado = document.getElementById("resultado"),
-    valido = "No válido";
-    //Valdiamos si esta lleno el campo
-    if(!$('#Curp').inputmask("isComplete")){
-        //mostrar mensaje de curp incompleta
-        swal({
-            title: "Datos insuficientes",
-            text: "Favor de proprocionar los 18 caracteres de la curp!",
-            icon: "warning",
-            button: "salir",
-          });
-        resultado.classList.remove("ok");
-    }else{
-        //Valdiamos la curp si esta escrita bien por renapo
-        if (curpValida(curp)) {
-            curpExiste(curp);
+        if (!validado)  //Coincide con el formato general?
+        
+            return false;
+        
+        //Validar que coincida el dígito verificador
+        function digitoVerificador(curp17) {
+            //Fuente https://consultas.curp.gob.mx/CurpSP/
+            var diccionario  = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
+                lngSuma      = 0.0,
+                lngDigito    = 0.0;
+            for(var i=0; i<17; i++)
+                lngSuma= lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
+            lngDigito = 10 - lngSuma % 10;
+            if(lngDigito == 10)
+                return 0;
+            return lngDigito;
+        }
+        if (validado[2] != digitoVerificador(validado[1])) 
+            return false;
             
+        return true; //Validado
+    }
+
+    $('#curp').change( function(){
+        $('#curp').val($('#curp').val().toUpperCase());
+        var curp = $('#curp').val();
+        //Valdiamos la curp si esta escrita bien por renapo
+        if(curp.length != 18) return;
+        if (curpValida(curp)) {
+            $(this).removeClass('is-invalid');
         } else {
-            resultado.classList.remove("ok");
+            // resultado.classList.remove("ok");
+            $(this).addClass('is-invalid');
             //Muesta mensaje si la curp esta escrita mal
-            swal({
+            Swal.fire({
                 title: "Lo sentimos",
                 text: "La curp proporcionada es erronea favor de consultarla",
                 icon: "warning",
                 button: "salir",
-              });
+            });
         }
-    }
     });
+    $('#cct').inputmask("25AAA9999A");
+    $('#cct').change( function(){
+        //Valdiamos la curp si esta escrita bien por renapo
+        if ($('#cct').inputmask('isComplete')) {
+            $(this).removeClass('is-invalid');
+        } else {
+            // resultado.classList.remove("ok");
+            $(this).addClass('is-invalid');
+            //Muesta mensaje si la curp esta escrita mal
+            Swal.fire({
+                title: "Lo sentimos",
+                text: "La clave de centro de trabajo proporcionada es erronea favor de consultarla",
+                icon: "warning",
+                button: "salir",
+            });
+        }
+    });
+});
