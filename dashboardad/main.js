@@ -152,7 +152,11 @@ $('#logout').click(function(e){
             '<td>' + informe.funcion + '</td>' +
             '<td>' + deprote + '</td>' +
             '<td>' + rama + '</td>';
-            html += '<td><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-info btnVer" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'"   data-id_zona="'+informe.id_zona+'" data-id_rama="'+informe.id_rama+'">VER</button></div></div></td>';
+            html += '<td>';
+            html += '<div class="text-center"><div class="btn-group"><button type="button" class="btn btn-info btnVer" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'"   data-id_zona="'+informe.id_zona+'" data-id_rama="'+informe.id_rama+'">VER</button></div></div>';
+            html += '<div class="text-center"><div class="btn-group"><button type="button" class="btn btn-success btnCedulas" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'"   data-id_zona="'+informe.id_zona+'" data-id_rama="'+informe.id_rama+'" data-id_categoria="'+informe.id_categoria+'" data-id_peso="'+informe.id_peso+'" data-id_prueba="'+informe.id_prueba+'">Imprimir Cedula</button></div></div>';
+            html += '<div class="text-center"><div class="btn-group"><button type="button" class="btn btn-success btnGafetes" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'"   data-id_zona="'+informe.id_zona+'" data-id_rama="'+informe.id_rama+'" data-id_categoria="'+informe.id_categoria+'" data-id_peso="'+informe.id_peso+'" data-id_prueba="'+informe.id_prueba+'">Imprimir Gafetes</button></div></div>';
+            html += '</td>'
             html += '</tr>';
         });
         $('#DataResult').html(html);
@@ -418,7 +422,22 @@ $('#logout').click(function(e){
             }   
          });
     });
-    
+
+    $(document).on("click", ".btnCedulas", function(){
+        cct = $(this).data('cct');
+        id_usuario = $(this).data('id_zona');
+        id_ciclo = $(this).data('id_ciclo');
+        id_funcion = $(this).data('id_funcion');
+        id_deporte = $(this).data('id_deporte');
+        id_rama = $(this).data('id_rama');
+        id_categoria = $(this).data('id_categoria');
+        id_peso = $(this).data('id_peso');
+        id_prueba = $(this).data('id_prueba');
+        METHOD = "POST";
+        formData = new FormData();
+        formData.append('METHOD', METHOD);
+
+    });
     $.fn.getFormData = function(metodo){
         data = new FormData();
         var dataArray = $(this).serializeArray();
