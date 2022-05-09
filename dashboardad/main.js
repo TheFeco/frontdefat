@@ -152,11 +152,11 @@ $('#logout').click(function(e){
             '<td>' + informe.funcion + '</td>' +
             '<td>' + deprote + '</td>' +
             '<td>' + rama + '</td>';
-            html += '<td>';
-            html += '<div class="text-center"><div class="btn-group"><button type="button" class="btn btn-info btnVer" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'"   data-id_zona="'+informe.id_zona+'" data-id_rama="'+informe.id_rama+'">VER</button></div></div>';
-            html += '<div class="text-center"><div class="btn-group"><button type="button" class="btn btn-success btnCedulas" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'"   data-id_zona="'+informe.id_zona+'" data-id_rama="'+informe.id_rama+'" data-id_categoria="'+informe.id_categoria+'" data-id_peso="'+informe.id_peso+'" data-id_prueba="'+informe.id_prueba+'">Imprimir Cedula</button></div></div>';
-            html += '<div class="text-center"><div class="btn-group"><button type="button" class="btn btn-success btnGafetes" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'"   data-id_zona="'+informe.id_zona+'" data-id_rama="'+informe.id_rama+'" data-id_categoria="'+informe.id_categoria+'" data-id_peso="'+informe.id_peso+'" data-id_prueba="'+informe.id_prueba+'">Imprimir Gafetes</button></div></div>';
-            html += '</td>'
+            html += '<td> <div class="row">';
+            html += '<div class="text-center col-xs-4" title="Ver registros"><div class="btn-group"><button type="button" class="btn btn-info btnVer" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'"   data-id_zona="'+informe.id_zona+'" data-id_rama="'+informe.id_rama+'"><i class="fas fa-eye"></i></button></div></div>';
+            html += '<div class="text-center col-xs-4" title="Imprimir cedula"><div class="btn-group"><button type="button" class="btn btn-success btnCedulas" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'"   data-id_zona="'+informe.id_zona+'" data-id_rama="'+informe.id_rama+'" data-id_categoria="'+informe.id_categoria+'" data-id_peso="'+informe.id_peso+'" data-id_prueba="'+informe.id_prueba+'"><i class="fas fa-print"></i></button></div></div>';
+            html += '<div class="text-center col-xs-4" title="Imprimir gafetes"><div class="btn-group"><button type="button" class="btn btn-success btnGafetes" data-cct="'+informe.cct+'" data-id_ciclo="'+informe.id_ciclo+'"  data-id_funcion="'+informe.id_funcion+'"  data-id_deporte="'+informe.id_deporte+'"   data-id_zona="'+informe.id_zona+'" data-id_rama="'+informe.id_rama+'" data-id_categoria="'+informe.id_categoria+'" data-id_peso="'+informe.id_peso+'" data-id_prueba="'+informe.id_prueba+'"><i class="fas fa-print"></i></button></div></div>';
+            html += '</div></td>'
             html += '</tr>';
         });
         $('#DataResult').html(html);
@@ -330,7 +330,6 @@ $('#logout').click(function(e){
                 },
                 error: function(data) {
                     var error = data;
-                    console.log(error.responseJSON);
                     console.log(error);
                     Swal.fire({
                         icon: 'warning',
@@ -436,6 +435,96 @@ $('#logout').click(function(e){
         METHOD = "POST";
         formData = new FormData();
         formData.append('METHOD', METHOD);
+        formData.append('usuario', id_usuario);
+        formData.append('ciclo', id_ciclo);
+        formData.append('funcion', id_funcion);
+        formData.append('deporte', id_deporte);
+        formData.append('rama', id_rama);
+        formData.append('peso', id_peso);
+        formData.append('prueba', id_prueba);
+        formData.append('categoria', id_categoria);
+        formData.append('cct', cct);
+        $.ajax({
+            url: baseUrl+"certificadopdf.php",
+            type: "POST",
+            dataType: "JSON",
+            data: formData,
+            contentType:false,
+            cache:false,
+            processData:false,
+            success: function(data){
+                var a = $("<a />");
+                a.attr("href", baseUrl+data.file);
+                a.attr("target", "_blank")
+                $("body").append(a);
+                a[0].click();
+                      
+            },
+            error: function(data) {
+                console.log(data);
+                Swal.fire({
+                    title: 'Lo sentimos',
+                    text: 'No se encontró información deseada'
+                });
+            }        
+        });
+
+    });
+    $(document).on("click", ".btnGafetes", function(){
+        cct = $(this).data('cct');
+        id_usuario = $(this).data('id_zona');
+        id_ciclo = $(this).data('id_ciclo');
+        id_funcion = $(this).data('id_funcion');
+        id_deporte = $(this).data('id_deporte');
+        id_rama = $(this).data('id_rama');
+        id_categoria = $(this).data('id_categoria');
+        id_peso = $(this).data('id_peso');
+        id_prueba = $(this).data('id_prueba');
+        METHOD = "POST";
+        formData = new FormData();
+        formData.append('METHOD', METHOD);
+        formData.append('usuario', id_usuario);
+        formData.append('ciclo', id_ciclo);
+        formData.append('funcion', id_funcion);
+        formData.append('deporte', id_deporte);
+        formData.append('rama', id_rama);
+        formData.append('peso', id_peso);
+        formData.append('prueba', id_prueba);
+        formData.append('categoria', id_categoria);
+        formData.append('cct', cct);
+        $.ajax({
+            url: baseUrl+"pdf.php",
+            type: "POST",
+            dataType: "JSON",
+            data: formData,
+            contentType:false,
+            cache:false,
+            processData:false,
+            success: function(data){
+                if( data.length != 0){
+                    var a = $("<a />");
+                    a.attr("href", baseUrl+data.file);
+                    a.attr("target", "_blank")
+                    $("body").append(a);
+                    a[0].click();
+                }else{
+                    Swal.fire({
+                        title: 'Lo sentimos',
+                        text: 'No se encontró información deseada'
+                    });
+                }
+                      
+            },
+            error: function(data) {
+                var error = data;
+                console.log(error);
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: error.menssage
+                });
+            }        
+        });
 
     });
     $.fn.getFormData = function(metodo){

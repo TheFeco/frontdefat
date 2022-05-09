@@ -1,8 +1,11 @@
 .user { display: none; }
-.bg-azul{ background-color: #651D32;;}
-.bg-verde{ background-color: #651D32;;}
-.bg-rojo{background-color: #651D32;;}
+.bg-azul{ background-color: #651D32;}
+.bg-verde{ background-color: #651D32;}
+.bg-rojo{background-color: #651D32;}
 
+.btnVer, .btnGafetes, .btnCedulas{
+  margin-left:5px;
+}
 .imagendefat{
     width: 100%;
     height: 100%;
