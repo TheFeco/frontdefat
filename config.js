@@ -1,6 +1,5 @@
 var miStorage = window.localStorage;
-const baseUrl = 'http://apirest.test/';
-// const baseUrl = 'http://juegosdeportivosescolares.sepyc.gob.mx/apidefat/';
+const baseUrl = 'http://apidefat.test/';
 
 function getUsuario(){
     var getUsuario = JSON.parse(window.localStorage.getItem("s_storage"));
@@ -17,6 +16,10 @@ function getNivel(){
 function getRol(){
     var getUsuario = JSON.parse(window.localStorage.getItem("s_storage"));
     return getUsuario.id_rol;
+}
+function getToken(){
+    var getUsuario = JSON.parse(window.localStorage.getItem("s_storage"));
+    return getUsuario.token;
 }
 
 function valdiateUrl(){

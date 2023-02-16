@@ -2,15 +2,7 @@
       </div>
       <!-- End of Main Content -->
 
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-        <span>Copyright &copy; Desarrollado por  &nbsp; &nbsp; </span>  <img class=desarrollado  src="../imagenes/logo1.png"  top="50px"> 
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
+      <?php require_once "vistas/footer.php"?>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -60,9 +52,24 @@
   <script src="vendor/ckeditor/adapters/jquery.js"></script>
   <!-- código propio JS --> 
   <script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
-  <script src="../../stororage.js"></script>
+  <script src="../../config.js"></script>
   <script type="text/javascript" src="main.js"></script>
-  <script type="text/javascript" src="deportistas.js"></script>
+  <?php
+    // Verificar la página actual y cargar los scripts correspondientes
+    $pagina_actual = basename($_SERVER['PHP_SELF']);
+    switch($pagina_actual) {
+      case 'deportistas.php':
+        echo '<script type="text/javascript" src="deportistas.js"></script>';
+        break;
+      case 'captura.php':
+        echo '<script type="text/javascript" src="js/captura.js"></script>';
+        break;
+      case 'otra_pagina.php':
+        echo '<script type="text/javascript" src="otra_pagina.js"></script>';
+        break;
+      // Agregar más casos para cada página adicional
+    }
+  ?>
 
 </body>
 
