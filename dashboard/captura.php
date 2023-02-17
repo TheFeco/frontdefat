@@ -20,11 +20,11 @@
                         <input type="text" class="form-control" id="curp" name="curp">
                     </div>
                     <div class="form-group">
-                        <label for="nombre" class="col-form-label">Nombre Compelto:</label>
+                        <label for="nombre" class="col-form-label">Nombre(s):</label>
                         <input type="text" class="form-control" id="nombre" name="nombre">
                     </div>
                     <div class="form-group">
-                        <label for="apellidos" class="col-form-label">Apellidos:</label>
+                        <label for="apellidos" class="col-form-label">Apellido(s):</label>
                         <input type="text" class="form-control" id="apellidos" name="apellidos">
                     </div>
                     <div class="form-group">
@@ -93,8 +93,28 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="edad" class="col-form-label">Foto:</label>
+                    <label for="foto" class="col-form-label">Foto:</label>
                     <input type="file" name="foto" class="form-control" id="foto" require>
+                </div>
+                <div class="form-group">
+                    <label for="actNacimiento" class="col-form-label">Acta de Nacimiento:</label>
+                    <input type="file" name="actNacimiento" class="form-control" id="actNacimiento" require>
+                </div>
+                <div class="form-group">
+                    <label for="curpPdf" class="col-form-label">Curp PDF:</label>
+                    <input type="file" name="curpPdf" class="form-control" id="curpPdf" require>
+                </div>
+                <div class="form-group">
+                    <label for="cerMedico" class="col-form-label">Certificado Medico:</label>
+                    <input type="file" name="cerMedico" class="form-control" id="cerMedico" require>
+                </div>
+                <div class="form-group">
+                    <label for="cartaResponsiva" class="col-form-label">Carta Responsiva:</label>
+                    <input type="file" name="cartaResponsiva" class="form-control" id="cartaResponsiva" require>
+                </div>
+                <div class="form-group">
+                    <label for="ine" class="col-form-label">INE:</label>
+                    <input type="file" name="ine" class="form-control" id="ine" require>
                 </div>
             </div>
         </div>

@@ -72,6 +72,7 @@ $('#formLogin').submit(function(e){
                    // Crea un objeto con los datos del usuario que se van a almacenar en el localStorage
                     var usuarioStorage = {
                         id: usuarioObj.id,
+                        usuario: usuarioObj.usuario,
                         id_nivel: usuarioObj.id_nivel,
                         id_rol: usuarioObj.id_rol,
                         token: usuarioObj.token

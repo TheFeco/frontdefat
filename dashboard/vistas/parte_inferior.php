@@ -61,6 +61,9 @@
       case 'deportistas.php':
         echo '<script type="text/javascript" src="deportistas.js"></script>';
         break;
+      case 'index.php':
+        echo '<script type="text/javascript" src="js/deportistas.js"></script>';
+        break;
       case 'captura.php':
         echo '<script type="text/javascript" src="js/captura.js"></script>';
         break;
