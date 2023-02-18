@@ -328,5 +328,17 @@ $(document).ready(function () {
         }
     });
 
+    function validar() {
+        var hasError = true
+        $('#formInformes input, #formInformes select').each(function () {
+            var input = $(this);
+            if (input.hasClass('is-invalid')) {
+                hasError = false;
+            }
+
+        });
+        return hasError;
+    }
+
     CargarDatos();
 });

@@ -7,6 +7,13 @@ $(document).ready(function () {
         window.location.href = "../index.php";
     }
 
+    if (!window.location.pathname.endsWith('deportistas.php') && sessionStorage.getItem('informe')) {
+        sessionStorage.removeItem('informe');
+    }
+
+
+    $('.loading').hide();
+
 
     tablaPersonas = $("#tablaPersonass").DataTable({
         "columnDefs": [{
@@ -155,8 +162,6 @@ $(document).ready(function () {
 
                 if (datos.registros.length > 0) {
                     llenaTablaInformes(datos.registros);
-                    // Añade los datos a la tabla de DataTable
-                    tablaPersonas.clear().rows.add($('#DataResult').find('tr')).draw();
 
                 }
             },
@@ -191,19 +196,26 @@ $(document).ready(function () {
     function llenaTablaInformes(data) {
         var html = "";
         $.each(data, function (key, informe) {
+            console.log(informe);
             var deporte = (informe.deporte == null) ? "" : informe.deporte;
             var rama = (informe.rama == null) ? "" : informe.rama;
-            html += '<tr>' +
+            html += '<tr data-informe="' + encodeURIComponent(JSON.stringify(informe)) + '">' +
                 '<td>' + informe.escuela + '</td>' +
                 '<td>' + informe.ciclo + '</td>' +
                 '<td>' + informe.funcion + '</td>' +
                 '<td>' + deporte + '</td>' +
                 '<td>' + rama + '</td>' +
-                '<td><button type="button" class="btn btn-info btnVer" data-id="' + informe.id + '">Ver</button></td>' +
+                '<td><button type="button" class="btn btn-info btn-sm" id="btnIrDeportistas">Ir a Deportistas</button> <button type="button" class="btn btn-success btn-sm" id="btnExcel">Excel</button></td>' +
                 '</tr>';
         });
         $("#DataResult").html(html);
     }
+
+    $(document).on('click', '#btnIrDeportistas', function () {
+        var informe = JSON.parse(decodeURIComponent($(this).closest('tr').attr('data-informe')));
+        sessionStorage.setItem('informe', JSON.stringify(informe));
+        window.location.href = 'deportistas.php';
+    });
 
     // Agrega el comportamiento de búsqueda
     $("#inputBusqueda").on("keyup", function () {
@@ -213,17 +225,62 @@ $(document).ready(function () {
         });
     });
 
-    function validar() {
-        var hasError = true
-        $('#formInformes input, #formInformes select').each(function () {
-            var input = $(this);
-            if (input.hasClass('is-invalid')) {
-                hasError = false;
-            }
+    $(document).on('click', '#btnExcel', function () {
+        $('.loading').show();
+        let EscuelaDatos = JSON.parse(decodeURIComponent($(this).closest('tr').attr('data-informe')));
+        METHOD = "POST";
+        // Crear un objeto FormData
+        let formData = new FormData();
 
+        console.log(EscuelaDatos.cct);
+        // Agregar la cadena JSON al objeto FormData
+        formData.append('cct', EscuelaDatos.cct);
+        formData.append('id_ciclo', EscuelaDatos.id_ciclo);
+        formData.append('id_funcion', EscuelaDatos.id_funcion);
+        formData.append('id_deporte', EscuelaDatos.id_deporte);
+        formData.append('id_rama', EscuelaDatos.id_rama);
+        formData.append('usuario', getUsuario());
+        formData.append('METHOD', METHOD);
+
+        $.ajax({
+            url: baseUrl + "exportExcel",
+            type: "POST",
+            dataType: "JSON",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                if (data.length != 0) {
+                    var a = $("<a />");
+                    a.attr("href", baseUrl + data.file);
+                    a.attr("target", "_blank")
+                    $("body").append(a);
+                    a[0].click();
+                    $('.loading').hide();
+                } else {
+                    $('.loading').hide();
+                    Swal.fire({
+                        title: 'Lo sentimos',
+                        text: 'No se encontró información deseada'
+                    });
+                    
+                }
+
+            },
+            error: function (error) {
+                $('.loading').hide();
+                console.log(error);
+                Swal.fire({
+                    title: 'Lo sentimos',
+                    text: 'Hubo un error al obtener los datos'
+                });
+                
+            }
         });
-        return hasError;
-    }
+    });
+
+
 
     $('#deporte').change(function () {
         let key = parseInt($(this).val());

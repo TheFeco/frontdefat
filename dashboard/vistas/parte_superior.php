@@ -28,6 +28,10 @@
 
 <body id="page-top">
 
+  <div class="loading">
+    <div class="loading-bar"></div>
+  </div>
+
   <!-- Page Wrapper -->
   <div id="wrapper">
 
