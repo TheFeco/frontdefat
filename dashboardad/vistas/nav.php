@@ -2,35 +2,42 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-    <div >
+        <div>
+            <br>
+            <img class="imagendefat" src="../imagenes/defat1.png" top="50px">
+        </div>
         <br>
-        <img class="imagendefat"  src="../imagenes/defat1.png"  top="50px">
-    </div>
+    </a>
     <br>
-  </a>
- <br>
- <div>
-</div>
+    <div>
+    </div>
     <!-- Divider -->
     <hr class="sidebar-divider my-4" top="20px">
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-    <a class="nav-link informesUrl" href="index.php">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Informes</span></a>
+        <a class="nav-link informesUrl" href="index.php">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Informes</span></a>
     </li>
-    
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link ciclosUrl" href="vistas/ciclos/ciclos.php">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Ciclos</span>
+        </a>
+    </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    
+
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
-    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 
 </ul>

@@ -196,7 +196,6 @@ $(document).ready(function () {
     function llenaTablaInformes(data) {
         var html = "";
         $.each(data, function (key, informe) {
-            console.log(informe);
             var deporte = (informe.deporte == null) ? "" : informe.deporte;
             var rama = (informe.rama == null) ? "" : informe.rama;
             html += '<tr data-informe="' + encodeURIComponent(JSON.stringify(informe)) + '">' +

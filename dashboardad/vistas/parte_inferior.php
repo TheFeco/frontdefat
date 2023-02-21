@@ -52,6 +52,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+  <script src="js/jquery.inputmask.min.js"></script>
 
   <!-- datatables JS -->
   <script type="text/javascript" src="vendor/datatables/datatables.min.js"></script>
@@ -59,8 +60,21 @@
   <script src="vendor/ckeditor/adapters/jquery.js"></script>
   <!-- código propio JS --> 
   <script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
-  <script src="../../stororage.js"></script>
+  <script src="../../config.js"></script>
   <script type="text/javascript" src="main.js"></script>
+  <?php
+    // Verificar la página actual y cargar los scripts correspondientes
+    $pagina_actual = basename($_SERVER['PHP_SELF']);
+    switch($pagina_actual) {
+      case 'ciclos.php':
+        echo '<script type="text/javascript" src="js/ciclos.js"></script>';
+        break;
+      case 'otra_pagina.php':
+        echo '<script type="text/javascript" src="otra_pagina.js"></script>';
+        break;
+      // Agregar más casos para cada página adicional
+    }
+  ?>
 
 </body>
 
