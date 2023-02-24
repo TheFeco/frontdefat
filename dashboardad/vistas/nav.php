@@ -20,9 +20,16 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Informes</span></a>
     </li>
-    <!-- Nav Item - Dashboard -->
+    <!-- Nav Item - Usuarios -->
     <li class="nav-item active">
-        <a class="nav-link ciclosUrl" href="vistas/ciclos/ciclos.php">
+        <a class="nav-link ciclosUrl" href="usuarios.php">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Usuarios</span>
+        </a>
+    </li>
+    <!-- Nav Item - Ciclos -->
+    <li class="nav-item active">
+        <a class="nav-link ciclosUrl" href="ciclos.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Ciclos</span>
         </a>

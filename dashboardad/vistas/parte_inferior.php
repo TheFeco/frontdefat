@@ -69,6 +69,9 @@
       case 'ciclos.php':
         echo '<script type="text/javascript" src="js/ciclos.js"></script>';
         break;
+      case 'usuarios.php':
+        echo '<script type="text/javascript" src="js/usuarios.js"></script>';
+        break;
       case 'otra_pagina.php':
         echo '<script type="text/javascript" src="otra_pagina.js"></script>';
         break;
