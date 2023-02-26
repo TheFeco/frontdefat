@@ -72,6 +72,12 @@
       case 'usuarios.php':
         echo '<script type="text/javascript" src="js/usuarios.js"></script>';
         break;
+      case 'usuarioNuevo.php':
+        echo '<script type="text/javascript" src="js/usuarioNuevo.js"></script>';
+        break;
+      case 'usuarioNuevo.php':
+        echo '<script type="text/javascript" src="js/usuarioEditar.js"></script>';
+        break;
       case 'otra_pagina.php':
         echo '<script type="text/javascript" src="otra_pagina.js"></script>';
         break;
