@@ -50,7 +50,7 @@ $(document).ready(function () {
         formData.append('METHOD', METHOD);
         formData.append('token', getToken());
         formData.append('nombre', $('#nvoCiclo').val());
-        let url = "ciclos";
+        let url = "ciclos.php";
         $.ajax({
             url: baseUrl + url,
             type: "POST",

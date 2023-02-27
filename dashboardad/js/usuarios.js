@@ -1,7 +1,7 @@
 $(document).ready(function () {
     function getListaUsuarios() {
         $('.loading').show();
-        let url = "usuarios?token=" + getToken();
+        let url = "usuarios.php?token=" + getToken();
         $.ajax({
             url: baseUrl + url,
             type: "GET",
@@ -37,7 +37,7 @@ $(document).ready(function () {
         var estado = $(this).is(':checked') ? "Inactivo" : "Activo"; // obtener el nuevo estado del usuario
 
         $.ajax({
-            url: baseUrl + "cambiarEstadoUsuario",
+            url: baseUrl + "cambiarEstadoUsuario.php",
             type: "POST",
             data: {
                 token: getToken(),
@@ -121,7 +121,7 @@ $(document).ready(function () {
         formData.append('token', getToken());
         formData.append('id', id);
         formData.append('password', password);
-        let url = "cambiarPasswordUsuario";
+        let url = "cambiarPasswordUsuario.php";
         $.ajax({
             url: baseUrl + url,
             type: "POST",
