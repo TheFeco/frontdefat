@@ -3,7 +3,7 @@
     <h1 class="text-center mb-5" style="color: #651D32;">Usuarios</h1>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-success btn-lg regresar">
+    <button type="button" id="regresar" class="btn btn-success btn-lg regresar">
         Regresar
     </button>
     <br>
