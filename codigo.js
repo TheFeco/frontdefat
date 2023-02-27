@@ -47,7 +47,7 @@ $('#formLogin').submit(function(e){
         var datos = {usuario: usuario, password: password};
 
         $.ajax({
-           url:baseUrl+"login",
+           url:baseUrl+"login.php",
            type:"POST",
            datatype: "json",
            data: datos, 

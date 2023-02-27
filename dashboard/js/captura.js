@@ -22,7 +22,7 @@ $(document).ready(function () {
         $(this).removeClass('is-invalid');
         
         // Realiza la llamada AJAX para obtener datos de las escuelas
-        const url = "escuelas?escuela='" + cct + "'";
+        const url = "escuelas.php?escuela='" + cct + "'";
         $.ajax({
             url: baseUrl + url,
             type: "GET",
