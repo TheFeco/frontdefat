@@ -5,7 +5,7 @@ $(document).ready(function() {
         $('.loading').show();
 
         var idUsuario = getParam('id');;
-        let url = "usuarios?id=" + idUsuario + "&token=" + getToken();
+        let url = "usuarios.php?id=" + idUsuario + "&token=" + getToken();
 
         $.ajax({
             url: baseUrl + url,
