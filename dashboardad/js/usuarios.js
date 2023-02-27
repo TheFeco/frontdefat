@@ -133,8 +133,8 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
 
-                $('#modelId').modal('hide');
-                getListaCiclos();
+                $('#resetPassword').modal('hide');
+                $('#nvoPassword').val("");
                 $('.loading').hide();
             },
             error: function (xhr, status, error) {
