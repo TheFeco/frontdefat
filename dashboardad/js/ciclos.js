@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     function getListaCiclos() {
         $('.loading').show();
-        let url = "ciclos?token=" + getToken();
+        let url = "ciclos.php?token=" + getToken();
         $.ajax({
             url: baseUrl + url,
             type: "GET",
