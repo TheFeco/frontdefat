@@ -1,5 +1,7 @@
 var miStorage = window.localStorage;
-const baseUrl = 'http://apidefat.test/';
+// const baseUrl = 'http://apidefat.test/';
+const baseUrl = 'http://juegosdeportivosescolares.sepyc.gob.mx/apidefat';
+
 
 function getUsuario(){
     var getUsuario = JSON.parse(window.localStorage.getItem("s_storage"));
