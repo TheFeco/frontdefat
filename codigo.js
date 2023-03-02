@@ -1,31 +1,25 @@
 // Incluye el archivo de configuración
 document.write('<script src="config.js"></script>');
 
+const DASHBOARD_URL = "dashboard/";
+const DASHBOARD_AD_URL = "dashboardad/";
+
+
+function redirigirADashboard() {
+  // Redirigir al usuario al dashboard correspondiente según su rol
+  
+  if (getRol() != 1) {
+    window.location.href = DASHBOARD_URL;
+  } else {
+    window.location.href = DASHBOARD_AD_URL;
+  }
+}
+
 $(document).ready(function () {
     if (localStorage.getItem("s_storage") != null) {
-        var token = getToken();
-
-        // Realiza una solicitud AJAX para validar el token
-        $.ajax({
-            url: baseUrl + "validar_token.php",
-            type: "POST",
-            data: { token: token },
-            success: function(data) {
-                // Si el token es válido, redirige al usuario a la página correspondiente
-                var newObject = JSON.parse(localStorage.getItem("s_storage"));
-                if (newObject[0].id_rol != 1) {
-                    window.location.href = "dashboard/index.php";
-                } else {
-                    window.location.href = "dashboardad/index.php";
-                }
-            },
-            error: function() {
-                // Si el token no es válido, elimina el almacenamiento local y redirige al usuario a la página de inicio de sesión
-                localStorage.removeItem("s_storage");
-                window.location.href = "/";
-            }
-        });
-    }
+        // Si s_storage existe en el almacenamiento local, redirigir al usuario al dashboard correspondiente
+        redirigirADashboard();
+      } 
 });
 //
 

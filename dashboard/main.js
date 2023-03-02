@@ -305,29 +305,7 @@ $(document).ready(function () {
             }
         }
     });
-    $('#funcion').change(function () {
-        let key = parseInt($(this).val());
-        $(".deporte").css("display", "none");
-        $(".rama").css("display", "none");
-        $(".categoria").css("display", "none");
-        $(".peso").css("display", "none");
-        $(".prueba").css("display", "none");
-        switch (key) {
-            case 1:
-                $(".deporte").css("display", "block");
-                $(".rama").css("display", "block");
-            case 2:
-                $(".deporte").css("display", "block");
-                $(".rama").css("display", "block");
-                break;
-            case 4:
-                $(".deporte").css("display", "block");
-                break;
-            case 6:
-                $(".deporte").css("display", "block");
-                break;
-        }
-    });
+    
     $('#rama').change(function () {
         let id_usuario = getUsuario();
         let id_deporte = $('#deporte').val();

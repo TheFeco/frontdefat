@@ -132,3 +132,7 @@
 	display: inline-block;
 	margin: 100px auto;
 }
+
+.fnDeportista, .fnEntrenadores{
+	display: none;
+}

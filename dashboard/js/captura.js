@@ -32,6 +32,9 @@ $(document).ready(function () {
 
                 if (data.length > 0) {
                     $('#escuela').val(data[0]["nombre"]);
+                    $('#municipio').val(data[0]["id_municipio"]);
+                    $('#turno').val(data[0]["id_turno"]);
+                    $('#zona').val(data[0]["zona"]);
                 }
                 
             },
@@ -66,6 +69,54 @@ $(document).ready(function () {
             });
         }
     });
+
+    function mostrarDeportistas() {
+        $(".deporte").css("display", "block");
+        $(".rama").css("display", "block");
+        $(".fnDeportista").css("display", "block");
+        $(".fnEntrenadores").css("display", "none");
+        $(".categoria").css("display", "none");
+        $(".peso").css("display", "none");
+        $(".prueba").css("display", "none");
+      }
+      
+      function mostrarEntrenadores() {
+        $(".deporte").css("display", "block");
+        $(".rama").css("display", "block");
+        $(".fnEntrenadores").css("display", "block");
+        $(".fnDeportista").css("display", "none");
+        $(".categoria").css("display", "none");
+        $(".peso").css("display", "none");
+        $(".prueba").css("display", "none");
+      }
+      
+      $('#funcion').change(function () {
+        const key = parseInt($(this).val());
+        
+        // Ocultar todos los elementos
+        $(".deporte, .rama, .categoria, .peso, .prueba, .fnDeportista, .fnEntrenadores").css("display", "none");
+        
+        // Mostrar los elementos según la key
+        switch (key) {
+          case 1:
+            mostrarDeportistas();
+            break;
+          case 2:
+            mostrarEntrenadores();
+            break;
+          case 4:
+            $(".deporte").css("display", "block");
+            break;
+          case 6:
+            $(".deporte").css("display", "block");
+            break;
+          default:
+            // Manejar keys que no estén incluidas en los casos anteriores
+            $(".deporte").css("display", "block");
+            break;
+        }
+      });
+      
     //Funciones
     function CargarDatos() {
         let url = "funciones.php?id=" + getUsuario();
@@ -259,27 +310,27 @@ $(document).ready(function () {
         } else {
             $('#formInformes #archivo').removeClass('is-invalid');
         }
-        if (!actNacimiento) {
+        if (!actNacimiento && funcion == 1) {
             $("#formInformes #actNacimiento").addClass('is-invalid');
         } else {
             $('#formInformes #actNacimiento').removeClass('is-invalid');
         }
-        if (!curpPdf) {
+        if (!curpPdf && funcion == 1 ) {
             $("#formInformes #curpPdf").addClass('is-invalid');
         } else {
             $('#formInformes #curpPdf').removeClass('is-invalid');
         }
-        if (!cerMedico) {
+        if (!cerMedico && funcion == 1) {
             $("#formInformes #cerMedico").addClass('is-invalid');
         } else {
             $('#formInformes #cerMedico').removeClass('is-invalid');
         }
-        if (!cartaResponsiva) {
+        if (!cartaResponsiva && funcion == 1) {
             $("#formInformes #cartaResponsiva").addClass('is-invalid');
         } else {
             $('#formInformes #cartaResponsiva').removeClass('is-invalid');
         }
-        if (!ine) {
+        if (!ine && funcion == 1) {
             $("#formInformes #ine").addClass('is-invalid');
         } else {
             $('#formInformes #ine').removeClass('is-invalid');

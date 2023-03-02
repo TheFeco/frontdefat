@@ -52,6 +52,9 @@
                         <option value="">Seleccionar...</option>
                         <option value="1">Matutino</option>
                         <option value="2">Vespertino</option>
+                        <option value="3">Nocturno</option>
+                        <option value="4">Discontinuo</option>
+                        <option value="5">Continuo</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -96,25 +99,33 @@
                     <label for="foto" class="col-form-label">Foto:</label>
                     <input type="file" name="foto" class="form-control" id="foto" require>
                 </div>
-                <div class="form-group">
+                <div class="form-group fnDeportista">
                     <label for="actNacimiento" class="col-form-label">Acta de Nacimiento:</label>
-                    <input type="file" name="actNacimiento" class="form-control" id="actNacimiento" require>
+                    <input type="file" name="actNacimiento" class="form-control" id="actNacimiento">
                 </div>
-                <div class="form-group">
+                <div class="form-group fnDeportista">
                     <label for="curpPdf" class="col-form-label">Curp PDF:</label>
-                    <input type="file" name="curpPdf" class="form-control" id="curpPdf" require>
+                    <input type="file" name="curpPdf" class="form-control" id="curpPdf">
                 </div>
-                <div class="form-group">
+                <div class="form-group fnDeportista">
                     <label for="cerMedico" class="col-form-label">Certificado Medico:</label>
-                    <input type="file" name="cerMedico" class="form-control" id="cerMedico" require>
+                    <input type="file" name="cerMedico" class="form-control" id="cerMedico">
                 </div>
-                <div class="form-group">
+                <div class="form-group fnDeportista">
                     <label for="cartaResponsiva" class="col-form-label">Carta Responsiva:</label>
-                    <input type="file" name="cartaResponsiva" class="form-control" id="cartaResponsiva" require>
+                    <input type="file" name="cartaResponsiva" class="form-control" id="cartaResponsiva">
                 </div>
-                <div class="form-group">
+                <div class="form-group fnDeportista">
                     <label for="ine" class="col-form-label">INE:</label>
-                    <input type="file" name="ine" class="form-control" id="ine" require>
+                    <input type="file" name="ine" class="form-control" id="ine">
+                </div>
+                <div class="form-group fnEntrenadores">
+                    <label for="constanciaAutorizacion" class="col-form-label">Constancia de Acreditación y Autorización:</label>
+                    <input type="file" name="constanciaAutorizacion" class="form-control" id="constanciaAutorizacion">
+                </div>
+                <div class="form-group fnEntrenadores">
+                    <label for="constanciaServicio" class="col-form-label">Constancia de Servicio:</label>
+                    <input type="file" name="constanciaServicio" class="form-control" id="constanciaServicio">
                 </div>
             </div>
         </div>
