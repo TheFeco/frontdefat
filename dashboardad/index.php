@@ -104,6 +104,7 @@
             <button type="button" id="btnCedula" class="btn btn-success">Imprimir Cedula</button>
             <button type="button" id="btnGafete" class="btn btn-success">Imprimir Gafete</button>
             <button type="button" id="btnExcel" class="btn btn-success">Exportar Excel</button>
+            <button type="button" id="btnTdoExcel" class="btn btn-primary">Exportar TodoExcel</button>
         </div>
     </div>
 </div>

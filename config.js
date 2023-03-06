@@ -1,5 +1,5 @@
 var miStorage = window.localStorage;
-// const baseUrl = 'http://apidefat.test/';
+// const baseUrl = 'http://apidefatw.test/';
 const baseUrl = 'http://juegosdeportivosescolares.sepyc.gob.mx/api/';
 
 
