@@ -71,6 +71,12 @@ button:hover {
 
 }
 
+.container-login h1 {
+  color: #fff; /* Color blanco para el texto */
+  font-weight: 900; /* Hace que el texto sea muy grueso */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra con desplazamiento de 2px hacia la derecha y hacia abajo, 4px de difuminado y opacidad de 50% */
+}
+
 
 .wrap-login {
   width: 490px;

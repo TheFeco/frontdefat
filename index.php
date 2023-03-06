@@ -25,12 +25,13 @@
 <body>
 
     <div class="container-login">
-        <div style="padding: 0 25%;">
-            <img class=juegos src="../imagenes/juegos2.png" top="50px">
+        <div class="mb-4" style="padding: 0 25%;">
+            <img class=juegos src="../imagenes/logo-white.png" top="50px">
+            <h1 class="text-center">JUEGOS DEPORTIVOS NACIONALES ESCOLARES DE LA EDUCACIÓN BÁSICA</h1>
         </div>
         <div class="wrap-login">
-            <form class="login-form validate-form" id="formLogin" action="" method="post">
-                <img class=imagenbaner src="../imagenes/baner2.png" top="10px">
+            <form class="login-form validate-form mb-4" id="formLogin" action="" method="post">
+                <img class=imagenbaner src="../imagenes/Cintillo.jpg" top="10px">
                 <span class="login-form-title">LOGIN</span>
 
                 <div class="wrap-input100" data-validate="Usuario incorrecto">
@@ -50,8 +51,6 @@
                         <button type="submit" name="submit" class="login-form-btn">CONECTAR</button>
                     </div>
                 </div>
-                <br>
-                <img class=imagenbaner src="../imagenes/baner2.png" top="50px">
             </form>
         </div>
     </div>
