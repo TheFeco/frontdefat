@@ -238,7 +238,7 @@ $(document).ready(function () {
         formData.append('id_funcion', EscuelaDatos.id_funcion);
         formData.append('id_deporte', EscuelaDatos.id_deporte);
         formData.append('id_rama', EscuelaDatos.id_rama);
-        formData.append('usuario', getUsuario());
+        formData.append('id_usuario', getUsuario());
         formData.append('METHOD', METHOD);
 
         $.ajax({
