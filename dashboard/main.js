@@ -231,7 +231,7 @@ $(document).ready(function () {
         // Crear un objeto FormData
         let formData = new FormData();
 
-        console.log(EscuelaDatos.cct);
+        console.log(EscuelaDatos);
         // Agregar la cadena JSON al objeto FormData
         formData.append('cct', EscuelaDatos.cct);
         formData.append('id_ciclo', EscuelaDatos.id_ciclo);
