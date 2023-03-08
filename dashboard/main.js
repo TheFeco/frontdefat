@@ -242,7 +242,7 @@ $(document).ready(function () {
         formData.append('METHOD', METHOD);
 
         $.ajax({
-            url: baseUrl + "exportExce.php",
+            url: baseUrl + "generarExcel.php",
             type: "POST",
             dataType: "JSON",
             data: formData,
