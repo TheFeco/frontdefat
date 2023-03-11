@@ -100,11 +100,7 @@
                     <input type="file" name="foto" class="form-control" id="foto" require>
                 </div>
                 <div class="form-group fnDeportista">
-                    <label for="actNacimiento" class="col-form-label">Acta de Nacimiento:</label>
-                    <input type="file" name="actNacimiento" class="form-control" id="actNacimiento">
-                </div>
-                <div class="form-group fnDeportista">
-                    <label for="curpPdf" class="col-form-label">Curp PDF:</label>
+                    <label for="curpPdf" class="col-form-label">Acta de Nacimiento, Curp o Pasaporte:</label>
                     <input type="file" name="curpPdf" class="form-control" id="curpPdf">
                 </div>
                 <div class="form-group fnDeportista">
@@ -116,14 +112,14 @@
                     <input type="file" name="cartaResponsiva" class="form-control" id="cartaResponsiva">
                 </div>
                 <div class="form-group fnDeportista">
-                    <label for="ine" class="col-form-label">INE:</label>
+                    <label for="ine" class="col-form-label">INE de Padre, Madre o Tutor:</label>
                     <input type="file" name="ine" class="form-control" id="ine">
                 </div>
                 <div class="form-group fnEntrenadores">
                     <label for="constanciaAutorizacion" class="col-form-label">Constancia de Acreditación y Autorización:</label>
                     <input type="file" name="constanciaAutorizacion" class="form-control" id="constanciaAutorizacion">
                 </div>
-                <div class="form-group fnEntrenadores">
+                <div class="form-group fnEntrenadores fnDelegados">
                     <label for="constanciaServicio" class="col-form-label">Constancia de Servicio:</label>
                     <input type="file" name="constanciaServicio" class="form-control" id="constanciaServicio">
                 </div>

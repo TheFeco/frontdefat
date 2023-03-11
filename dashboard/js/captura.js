@@ -104,11 +104,21 @@ $(document).ready(function () {
           case 2:
             mostrarEntrenadores();
             break;
+          case 3:
+            $(".fnEntrenadores.fnDelegados").css("display", "block");
+            break;
           case 4:
             $(".deporte").css("display", "block");
             break;
           case 6:
             $(".deporte").css("display", "block");
+            break;
+          case 7:
+            $(".deporte").css("display", "block");
+            $(".fnEntrenadores.fnDelegados").css("display", "block");
+            break;
+          case 8:
+            mostrarEntrenadores();
             break;
           default:
             // Manejar keys que no estén incluidas en los casos anteriores

@@ -204,7 +204,7 @@ $(document).ready(function () {
                 '<td>' + informe.funcion + '</td>' +
                 '<td>' + deporte + '</td>' +
                 '<td>' + rama + '</td>' +
-                '<td><button type="button" class="btn btn-info btn-sm" id="btnIrDeportistas">Ir a Deportistas</button> <button type="button" class="btn btn-success btn-sm" id="btnExcel">Excel</button></td>' +
+                '<td><button type="button" class="btn btn-info btn-sm" id="btnIrDeportistas">Ir a Deportistas</button> <button type="button" class="btn btn-success btn-sm" id="btnExcel">Excel</button> <button type="button" class="btn btn-success btnCedulas"><i class="fas fa-print"></i></button></td>' +
                 '</tr>';
         });
         $("#DataResult").html(html);
@@ -230,8 +230,7 @@ $(document).ready(function () {
         METHOD = "POST";
         // Crear un objeto FormData
         let formData = new FormData();
-
-        console.log(EscuelaDatos);
+        
         // Agregar la cadena JSON al objeto FormData
         formData.append('cct', EscuelaDatos.cct);
         formData.append('id_ciclo', EscuelaDatos.id_ciclo);
@@ -243,6 +242,61 @@ $(document).ready(function () {
 
         $.ajax({
             url: baseUrl + "exportExcel.php",
+            type: "POST",
+            dataType: "JSON",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                if (data.length != 0) {
+                    var a = $("<a />");
+                    a.attr("href", baseUrl + data.file);
+                    a.attr("target", "_blank")
+                    $("body").append(a);
+                    a[0].click();
+                    $('.loading').hide();
+                } else {
+                    $('.loading').hide();
+                    Swal.fire({
+                        title: 'Lo sentimos',
+                        text: 'No se encontró información deseada'
+                    });
+                    
+                }
+
+            },
+            error: function (error) {
+                $('.loading').hide();
+                console.log(error);
+                Swal.fire({
+                    title: 'Lo sentimos',
+                    text: 'Hubo un error al obtener los datos'
+                });
+                
+            }
+        });
+    });
+
+    $(document).on('click', '.btnCedulas', function () {
+        $('.loading').show();
+        let EscuelaDatos = JSON.parse(decodeURIComponent($(this).closest('tr').attr('data-informe')));
+        METHOD = "POST";
+        // Crear un objeto FormData
+        console.log(EscuelaDatos);
+        let formData = new FormData();
+        
+        // Agregar la cadena JSON al objeto FormData
+        formData.append('cct', EscuelaDatos.cct);
+        formData.append('id_ciclo', EscuelaDatos.id_ciclo);
+        formData.append('id_funcion', EscuelaDatos.id_funcion);
+        formData.append('id_deporte', EscuelaDatos.id_deporte);
+        formData.append('id_rama', EscuelaDatos.id_rama);
+        formData.append('id_usuario', getUsuario());
+        formData.append('METHOD', METHOD);
+
+        $.ajax({
+            url: baseUrl + "certificado.php",
             type: "POST",
             dataType: "JSON",
             data: formData,
