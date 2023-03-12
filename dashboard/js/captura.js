@@ -219,7 +219,7 @@ $(document).ready(function () {
         peso = parseInt($("#peso").val());
         prueba = parseInt($("#prueba").val());
         archivo = $("#formInformes #foto").val();
-        actNacimiento = $("#formInformes #actNacimiento").val();
+        // actNacimiento = $("#formInformes #actNacimiento").val();
         curpPdf = $("#formInformes #curpPdf").val();
         cerMedico = $("#formInformes #cerMedico").val();
         cartaResponsiva = $("#formInformes #cartaResponsiva").val();
@@ -320,11 +320,11 @@ $(document).ready(function () {
         } else {
             $('#formInformes #archivo').removeClass('is-invalid');
         }
-        if (!actNacimiento && funcion == 1) {
-            $("#formInformes #actNacimiento").addClass('is-invalid');
-        } else {
-            $('#formInformes #actNacimiento').removeClass('is-invalid');
-        }
+        // if (!actNacimiento && funcion == 1) {
+        //     $("#formInformes #actNacimiento").addClass('is-invalid');
+        // } else {
+        //     $('#formInformes #actNacimiento').removeClass('is-invalid');
+        // }
         if (!curpPdf && funcion == 1 ) {
             $("#formInformes #curpPdf").addClass('is-invalid');
         } else {
