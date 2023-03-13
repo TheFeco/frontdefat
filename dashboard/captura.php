@@ -100,6 +100,10 @@
                     <input type="file" name="foto" class="form-control" id="foto" require>
                 </div>
                 <div class="form-group fnDeportista">
+                    <label for="constanciaEstudio" class="col-form-label">Constancia de Estudio:</label>
+                    <input type="file" name="constanciaEstudio" class="form-control" id="constanciaEstudio">
+                </div>
+                <div class="form-group fnDeportista">
                     <label for="curpPdf" class="col-form-label">Acta de Nacimiento, Curp o Pasaporte:</label>
                     <input type="file" name="curpPdf" class="form-control" id="curpPdf">
                 </div>

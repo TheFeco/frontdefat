@@ -221,6 +221,7 @@ $(document).ready(function () {
         archivo = $("#formInformes #foto").val();
         // actNacimiento = $("#formInformes #actNacimiento").val();
         curpPdf = $("#formInformes #curpPdf").val();
+        constanciaEstudio = $("#formInformes #constanciaEstudio").val();
         cerMedico = $("#formInformes #cerMedico").val();
         cartaResponsiva = $("#formInformes #cartaResponsiva").val();
         ine = $("#formInformes #ine").val();
@@ -325,6 +326,11 @@ $(document).ready(function () {
         // } else {
         //     $('#formInformes #actNacimiento').removeClass('is-invalid');
         // }
+        if (!constanciaEstudio && funcion == 1) {
+            $("#formInformes #constanciaEstudio").addClass('is-invalid');
+        } else {
+            $('#formInformes #constanciaEstudio').removeClass('is-invalid');
+        }
         if (!curpPdf && funcion == 1 ) {
             $("#formInformes #curpPdf").addClass('is-invalid');
         } else {

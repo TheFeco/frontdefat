@@ -57,18 +57,19 @@
   <?php
     // Verificar la página actual y cargar los scripts correspondientes
     $pagina_actual = basename($_SERVER['PHP_SELF']);
+    $random_number = rand(1, 1000000); // Genera un número aleatorio
     switch($pagina_actual) {
       case 'deportistas.php':
-        echo '<script type="text/javascript" src="js/deportistas.js"></script>';
+        echo '<script type="text/javascript" src="js/deportistas.js?ver='.$random_number.'"></script>';
         break;
       case 'index.php':
-        echo '<script type="text/javascript" src="deportistas.js"></script>';
+        echo '<script type="text/javascript" src="deportistas.js?ver='.$random_number.'"></script>';
         break;
       case 'captura.php':
-        echo '<script type="text/javascript" src="js/captura.js"></script>';
+        echo '<script type="text/javascript" src="js/captura.js?ver='.$random_number.'"></script>';
         break;
       case 'otra_pagina.php':
-        echo '<script type="text/javascript" src="otra_pagina.js"></script>';
+        echo '<script type="text/javascript" src="otra_pagina.js?ver='.$random_number.'"></script>';
         break;
       // Agregar más casos para cada página adicional
     }
