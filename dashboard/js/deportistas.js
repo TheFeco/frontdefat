@@ -57,7 +57,7 @@ $(document).ready(function () {
                             '<td>' + rama + '</td>' +
                             '<td>' + informe.array_pruebas + '</td>';
                     }
-                    html += '<td><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-danger btnDelete" data-id="' + informe.id + '">Borrar</button></div></div></td>';
+                    html += '<td><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-primary btnEditar" data-id="' + informe.id + '">Editar</button> <button type="button" class="btn btn-danger btnDelete" data-id="' + informe.id + '">Borrar</button></div></div></td>';
                     html += '</tr>';
                 });
 
@@ -74,6 +74,13 @@ $(document).ready(function () {
             }
         });
     }
+
+    // Agregar evento click al botón "Editar"
+    $(document).on("click", ".btnEditar", function(){
+        var idDeportista = $(this).attr('data-id');
+        // Redirigir a la página de captura de edición con el id del deportista
+        window.location.href = "capturaEditar.php?id=" + idDeportista;
+    });
 
     $(document).on("click", ".btnDelete", function(){
         var id = $(this).data('id');

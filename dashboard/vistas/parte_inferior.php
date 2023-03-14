@@ -68,6 +68,9 @@
       case 'captura.php':
         echo '<script type="text/javascript" src="js/captura.js?ver='.$random_number.'"></script>';
         break;
+      case 'capturaEditar.php':
+        echo '<script type="text/javascript" src="js/capturaEditar.js?ver='.$random_number.'"></script>';
+        break;
       case 'otra_pagina.php':
         echo '<script type="text/javascript" src="otra_pagina.js?ver='.$random_number.'"></script>';
         break;

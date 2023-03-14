@@ -378,7 +378,9 @@ $(document).ready(function () {
                 processData: false,
                 success: function (data) {
                     var datos = data;
-                    $("#modalSuccess").modal('show');
+                    $("#modalSuccess").modal({
+                        backdrop: 'static'
+                    }).modal('show');
 
                 },
                 error: function (data) {
