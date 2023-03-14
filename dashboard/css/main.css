@@ -4,7 +4,7 @@
 .bg-azul{ background-color: #651D32;}
 .bg-verde{ background-color: #651D32;}
 .bg-rojo{background-color: #651D32;}
-.btn-green{background-color: #48a259;}
+.btn-green{background-color: #48a259 !important;}
 
 .loading {
 	position: fixed;
@@ -107,7 +107,7 @@
 .modal-confirm .btn, .modal-confirm .btn:active {
 	color: #fff;
 	border-radius: 4px;
-	background: #eeb711 !important;
+	background: #eeb711;
 	text-decoration: none;
 	transition: all 0.4s;
 	line-height: normal;
@@ -117,7 +117,7 @@
 	border: none;
 }
 .modal-confirm .btn:hover, .modal-confirm .btn:focus {
-	background: #eda645 !important;
+	background: #eda645 ;
 	outline: none;
 }
 .modal-confirm .btn span {

@@ -53,6 +53,11 @@ $(document).ready(function () {
     $('#curp').change( function(){
         $('#curp').val($('#curp').val().toUpperCase());
         var curp = $('#curp').val();
+        // Si la CURP empieza con 'X', no se valida
+        if (curp.charAt(0) === 'X') {
+            $(this).removeClass('is-invalid');
+            return;
+        }
         //Valdiamos la curp si esta escrita bien por renapo
         if(curp.length != 18) return;
         if (curpValida(curp)) {
@@ -237,11 +242,11 @@ $(document).ready(function () {
         } else {
             $('#formInformes input#nombre').removeClass('is-invalid');
         }
-        if (!curp) {
-            $('#formInformes #curp').addClass('is-invalid');
-        } else {
-            $('#formInformes input#curp').removeClass('is-invalid');
-        }
+        // if (!curp) {
+        //     $('#formInformes #curp').addClass('is-invalid');
+        // } else {
+        //     $('#formInformes input#curp').removeClass('is-invalid');
+        // }
         if (!apellidos) {
             $('#formInformes #apellidos').addClass('is-invalid');
         } else {
@@ -356,7 +361,7 @@ $(document).ready(function () {
         } else {
             $('#cct').addClass('is-invalid');
         }
-        if (curpValida(curp.toUpperCase())) {
+        if (curpValida(curp.toUpperCase()) || curp.charAt(0) === 'X') {
             $('#curp').removeClass('is-invalid');
         } else {
             $('#curp').addClass('is-invalid');
