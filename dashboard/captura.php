@@ -150,7 +150,7 @@
                 <h4>Genial!</h4>
                 <p>¡Se guardo Exitosamente!.</p>
                 <button class="btn btn-success" id="btnModalOtro"><span>Capturar Otro</span> <i class="fad fa-users"></i></button>
-                <button class="btn btn-return" id="btnRegresar"><span>Regresar</span> <i class="fad fa-arrow-alt-left"></i></button>
+                <button class="btn btn-return btn-green" id="btnRegresar"><span>Finalizar</span> <i class="fad fa-arrow-alt-left"></i></button>
             </div>
         </div>
     </div>
