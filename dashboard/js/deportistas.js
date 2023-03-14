@@ -57,10 +57,10 @@ $(document).ready(function () {
                             '<td>' + rama + '</td>' +
                             '<td>' + informe.array_pruebas + '</td>';
                     }
-                    html += '<td><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-primary btnEditar" data-id="' + informe.id + '">Editar</button> <button type="button" class="btn btn-danger btnDelete" data-id="' + informe.id + '">Borrar</button></div></div></td>';
+                    html += '<td><div class="text-center"><div class="btn-group"> <button type="button" class="btn btn-danger btnDelete" data-id="' + informe.id + '">Borrar</button></div></div></td>';
                     html += '</tr>';
                 });
-
+                // <button type="button" class="btn btn-primary btnEditar" data-id="' + informe.id + '">Editar</button>
                 $('#ListaDeportistas').html(html);
                 $('.loading').hide();
             },

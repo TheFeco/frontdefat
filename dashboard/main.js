@@ -283,7 +283,6 @@ $(document).ready(function () {
         let EscuelaDatos = JSON.parse(decodeURIComponent($(this).closest('tr').attr('data-informe')));
         METHOD = "POST";
         // Crear un objeto FormData
-        console.log(EscuelaDatos);
         let formData = new FormData();
         
         // Agregar la cadena JSON al objeto FormData
@@ -345,9 +344,6 @@ $(document).ready(function () {
                 case 1:
                     getDeporteCampos('getCategorias.php?id=' + key, 'categoria');
                     break;
-                case 2:
-                    getDeporteCampos('getPruebas.php?id=' + key, 'prueba');
-                    break;
                 case 3:
                     getDeporteCampos('getCategorias.php?id=' + key, 'categoria');
                     break;
@@ -362,10 +358,14 @@ $(document).ready(function () {
     
     $('#rama').change(function () {
         let id_usuario = getUsuario();
+        let id_nivel = getNivel();
         let id_deporte = $('#deporte').val();
         let id_rama = $(this).val();
         if (id_deporte == 8 && id_usuario != '' && id_rama != '') {
             getDeporteCampos('getPeso.php?id_deporte=' + id_deporte + '&id_usuario=' + id_usuario + '&id_rama=' + id_rama, 'peso');
+        }
+        if (id_deporte == 2 && id_usuario != '' && id_rama != '') {
+            getDeporteCampos('getPruebas.php?id_deporte=' + id_deporte + '&id_nivel=' + id_nivel + '&id_rama=' + id_rama, 'prueba');
         }
 
     });
