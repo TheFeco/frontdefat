@@ -31,7 +31,7 @@
   <div class="loading">
     <div class="loading-bar"></div>
   </div>
-
+  <div id="overlay-2"></div>
   <!-- Page Wrapper -->
   <div id="wrapper">
 

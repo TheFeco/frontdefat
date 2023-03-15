@@ -57,7 +57,7 @@ $(document).ready(function () {
                             '<td>' + rama + '</td>' +
                             '<td>' + informe.array_pruebas + '</td>';
                     }
-                    html += '<td><div class="text-center"><div class="btn-group"> <button type="button" class="btn btn-danger btnDelete" data-id="' + informe.id + '">Borrar</button></div></div></td>';
+                    html += '<td><div class="text-center"><div class="btn-group"> <button type="button" class="btn btn-info btnSubirFormatos" data-id="' + informe.id + '" data-funcion="' + id_funcion + '">Subir formatos</button><button type="button" class="btn btn-danger btnDelete" data-id="' + informe.id + '">Borrar</button></div></div></td>';
                     html += '</tr>';
                 });
                 // <button type="button" class="btn btn-primary btnEditar" data-id="' + informe.id + '">Editar</button>
@@ -116,6 +116,114 @@ $(document).ready(function () {
             }
         });
     }
+    $(document).on("click", ".btnSubirFormatos", function() {
+        var idDeportista = $(this).attr('data-id');
+        var idFuncion = $(this).attr('data-funcion');
+        
+        // Mostrar la barra lateral y cargar el formulario según la función del deportista
+        showSidebar(idDeportista, idFuncion);
+    });
+
+    $(document).on("click", ".close-sidebar", function() {
+        closeSidebar();
+    });
+
+    $(document).on("click", "#overlay-2", function() {
+        closeSidebar();
+    });
+
+    function showSidebar(idDeportista, idFuncion) {
+        // Aquí va el código para mostrar la barra lateral y cargar el formulario adecuado según la función del deportista.
+        // Puedes agregar condiciones para mostrar distintos campos del formulario según el valor de "idFuncion".
+        loadFields(idFuncion);
+        // Establecer el valor del campo idDeportista en el formulario
+        $('#idDeportista').val(idDeportista);
+
+        // Mostrar la barra lateral
+        $('.sidebar-data').addClass('open');
+        $('#overlay-2').show();
+    }
+
+
+
+    function closeSidebar() {
+        // Ocultar la barra lateral
+        $('.sidebar-data').removeClass('open');
+        $('#uploadForm')[0].reset();
+        $('#overlay-2').hide();
+    }
+
+    function loadFields(idFuncion) {
+        // Ocultar todos los campos
+        $('#uploadForm .acta-curp, #uploadForm .constancia-estudio, #uploadForm .certificado-medico, #uploadForm .carta-responsiva, #uploadForm .ine, #uploadForm .constancia-acreditacion, #uploadForm .constancia-servicios').hide();
+        console.log(idFuncion);
+        // Mostrar campos según el valor de idFuncion
+        switch (parseInt(idFuncion)) {
+            case 1:
+                $('#uploadForm .acta-curp, #uploadForm .constancia-estudio, #uploadForm .certificado-medico, #uploadForm .carta-responsiva, #uploadForm .ine').show();
+                break;
+            case 2:
+            case 8:
+                $('#uploadForm .constancia-acreditacion, #uploadForm .constancia-servicios').show();
+                break;
+            case 3:
+            case 7:
+                $('#uploadForm .constancia-servicios').show();
+                break;
+        }
+    }
+
+    $('#uploadForm').submit(function (event) {
+        event.preventDefault();
+        // Obtener el archivo seleccionado en el campo de foto
+        var archivoFoto = $("#foto")[0].files[0];
+
+        // Comprobar si el archivo tiene un formato de imagen válido
+        var formatosPermitidos = ["image/jpeg", "image/png", "image/gif"];
+        if (archivoFoto && !formatosPermitidos.includes(archivoFoto.type)) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "El archivo seleccionado no es una imagen válida. Por favor, elige un archivo en formato JPEG, PNG o GIF.",
+            });
+            return;
+        }
+        var id_deportista = $('#idDeportista').val(); // Obtén el ID del deportista del campo oculto
+        guardarFormatos(id_deportista);
+    });
+
+    function guardarFormatos(id_deportista) {
+        $('.loading').show();
+        var formData = new FormData($('#uploadForm')[0]);
+        formData.append('METHOD', 'POST');
+        formData.append('token', getToken());
+        formData.append('id_deportista', id_deportista);
+        
+        $.ajax({
+            url: baseUrl + 'updateformatos.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                // Procesar la respuesta del servidor (puedes mostrar un mensaje de éxito o realizar alguna acción)
+                console.log(response);
+                closeSidebar();
+                $('.loading').hide();
+            },
+            error: function () {
+                // Mostrar un mensaje de error si algo sale mal en la petición
+                $('.loading').hide();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Hubo un error al subir los documentos!'
+                });
+            }
+        });
+    }
+    
+    
 
     //llamada de funciones 
     getListaDeportistas();
