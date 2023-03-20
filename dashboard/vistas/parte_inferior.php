@@ -53,11 +53,12 @@
   <!-- código propio JS --> 
   <script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
   <script src="../../config.js"></script>
-  <script type="text/javascript" src="main.js"></script>
+  <!-- <script type="text/javascript" src="main.js?ver=3"></script> -->
   <?php
     // Verificar la página actual y cargar los scripts correspondientes
     $pagina_actual = basename($_SERVER['PHP_SELF']);
     $random_number = rand(1, 1000000); // Genera un número aleatorio
+    echo '<script type="text/javascript" src="main.js?ver='.$random_number.'"></script>';
     switch($pagina_actual) {
       case 'deportistas.php':
         echo '<script type="text/javascript" src="js/deportistas.js?ver='.$random_number.'"></script>';

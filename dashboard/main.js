@@ -3,9 +3,25 @@ var fila; //capturar la fila para editar o borrar el registro
 var ciclo;
 var periodos;
 $(document).ready(function () {
-    if (localStorage.getItem("s_storage") === null) {
-        window.location.href = "../index.php";
-    }
+    if (localStorage.getItem("s_storage") != null) {
+    
+        // window.location.href = "../index.php";
+        $.ajax({
+          url: baseUrl + "validarToken.php",
+          type: "POST",
+          datatype: "json",
+          data: {
+            token: getToken()
+          },
+          success: function (data) {
+            datos  = JSON.parse(data);
+            if (!datos.valido) {
+                localStorage.removeItem("s_storage");
+                window.location.href = "../index.php";
+            } 
+          },
+        });
+      }
 
     if (!window.location.pathname.endsWith('deportistas.php') && sessionStorage.getItem('informe')) {
         sessionStorage.removeItem('informe');
