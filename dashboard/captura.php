@@ -94,6 +94,11 @@
                     <select id="prueba" class="form-control" name="prueba">
                     </select>
                 </div>
+                <div class="form-group prueba2" style="display:none;">
+                    <label for="prueba2" class="col-form-label">Segunda Prueba:</label>
+                    <select id="prueba2" class="form-control" name="prueba2">
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label for="foto" class="col-form-label">Foto:</label>

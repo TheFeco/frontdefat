@@ -3,16 +3,56 @@
 <!--INICIO del cont principal-->
 <div class="container">
     <h1 align="center">Lista de Escuelas con alumnos Capturados</h1>
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
                 <button id="btnNuevo" type="button" class="btn btn-success" data-toggle="modal">Nuevo</button>
             </div>
-            <div class="col-lg-6">
-                <input type="text" class="form-control" id="inputBusqueda" placeholder="Buscar">
-            </div>
         </div>
     </div>
+    <form id="formBuscarDeportistas" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <label for="ciclos" class="col-form-label">Ciclos:</label>
+                    <select id="ciclo" class="form-control requerido" name="ciclo">
+                        <option value="">Seleccionar...</option>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <label for="funciones" class="col-form-label">Funciones:</label>
+                    <select id="funcion" class="form-control requerido" name="funcion">
+                        <option value="">Seleccionar...</option>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <label for="deportes" class="col-form-label">Deportes:</label>
+                    <select id="deporte" class="form-control" name="deporte">
+                        <option value="">Seleccionar...</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="ramas" class="col-form-label">Ramas:</label>
+                    <select id="rama" class="form-control" name="rama">
+                        <option value="">Seleccionar...</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div align="right" class="col-lg-10">
+                    <button type="button" id="btnCedula" class="btn btn-success" style="display: none;">Imprimir Cedula</button>
+                </div>
+                <div align="right" class="col-lg-2">
+                    <button a id="btnbuscar" type="submit" class="btn btn-success">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </form>
     <br>
     <div class="container">
         <div class="row">
