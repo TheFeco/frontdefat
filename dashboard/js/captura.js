@@ -76,61 +76,59 @@ $(document).ready(function () {
     });
 
     function mostrarDeportistas() {
-        $(".deporte").css("display", "block");
-        $(".rama").css("display", "block");
+        $(".deporte").css("display", "block").val('');
+        $(".rama").css("display", "block").val('');
         $(".fnDeportista").css("display", "block");
         $(".fnEntrenadores").css("display", "none");
-        $(".categoria").css("display", "none");
-        $(".peso").css("display", "none");
-        $(".prueba").css("display", "none");
+        $(".categoria").css("display", "none").val('');
+        $(".peso").css("display", "none").val('');
+        $(".prueba, .prueba2").css("display", "none").val('');
       }
       
       function mostrarEntrenadores() {
-        $(".deporte").css("display", "block");
-        $(".rama").css("display", "block");
+        $(".deporte").css("display", "block").val('');
+        $(".rama").css("display", "block").val('');
         $(".fnEntrenadores").css("display", "block");
         $(".fnDeportista").css("display", "none");
-        $(".categoria").css("display", "none");
-        $(".peso").css("display", "none");
-        $(".prueba").css("display", "none");
+        $(".categoria").css("display", "none").val('');
+        $(".peso").css("display", "none").val('');
+        $(".prueba, .prueba2").css("display", "none").val('');
       }
       
       $('#funcion').change(function () {
         const key = parseInt($(this).val());
         
-        // Ocultar todos los elementos
-        $(".deporte, .rama, .categoria, .peso, .prueba, .fnDeportista, .fnEntrenadores").css("display", "none");
+        // Ocultar todos los elementos y limpiar los campos select
+        $(".deporte, .rama, .categoria, .peso, .prueba, .fnDeportista, .fnEntrenadores").css("display", "none").val('');
         
         // Mostrar los elementos según la key
         switch (key) {
-          case 1:
-            mostrarDeportistas();
-            break;
-          case 2:
-            mostrarEntrenadores();
-            break;
-          case 3:
-            $(".fnEntrenadores.fnDelegados").css("display", "block");
-            break;
-          case 4:
-            $(".deporte").css("display", "block");
-            break;
-          case 6:
-            $(".deporte").css("display", "block");
-            break;
-          case 7:
-            $(".deporte").css("display", "block");
-            $(".fnEntrenadores.fnDelegados").css("display", "block");
-            break;
-          case 8:
-            mostrarEntrenadores();
-            break;
-          default:
-            // Manejar keys que no estén incluidas en los casos anteriores
-            $(".deporte").css("display", "block");
-            break;
+            case 1:
+                mostrarDeportistas();
+                break;
+            case 2:
+                mostrarEntrenadores();
+                break;
+            case 3:
+                $(".fnEntrenadores.fnDelegados").css("display", "block");
+                break;
+            case 4:
+            case 6:
+            case 7:
+                $(".deporte").css("display", "block").val('');
+                if (key == 7) {
+                    $(".fnEntrenadores.fnDelegados").css("display", "block");
+                }
+                break;
+            case 8:
+                mostrarEntrenadores();
+                break;
+            default:
+                // Manejar keys que no estén incluidas en los casos anteriores
+                $(".deporte").css("display", "block").val('');
+                break;
         }
-      });
+    });
       
     //Funciones
     function CargarDatos() {
@@ -223,6 +221,7 @@ $(document).ready(function () {
         categoria = parseInt($("#categoria").val());
         peso = parseInt($("#peso").val());
         prueba = parseInt($("#prueba").val());
+        prueba2 = parseInt($("#prueba2").val());
         archivo = $("#formInformes #foto").val();
         // actNacimiento = $("#formInformes #actNacimiento").val();
         curpPdf = $("#formInformes #curpPdf").val();

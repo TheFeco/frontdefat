@@ -287,7 +287,7 @@ $(document).ready(function () {
         getDeporteCampos("getCategorias.php?id=" + key, "categoria");
         break;
       case 2:
-        getDeporteCampos("getPruebas.php?id=" + key, "prueba");
+        //getDeporteCampos('getPruebas.php?id_deporte=' + id_deporte + '&id_nivel=' + id_nivel + '&id_rama=' + id_rama, 'prueba');
         break;
       case 3:
         getDeporteCampos("getCategorias.php?id=" + key, "categoria");
@@ -316,6 +316,9 @@ $(document).ready(function () {
           id_rama,
         "peso"
       );
+    }
+    if (id_deporte == 2 && id_usuario != '' && id_rama != '') {
+        getDeporteCampos('getPruebas.php?id_deporte=' + id_deporte + '&id_usuario=' + id_usuario + '&id_rama=' + id_rama, 'prueba');
     }
   });
   $("#peso").change(function () {

@@ -4,24 +4,24 @@ var ciclo;
 var periodos;
 $(document).ready(function () {
     if (localStorage.getItem("s_storage") != null) {
-    
+
         // window.location.href = "../index.php";
         $.ajax({
-          url: baseUrl + "validarToken.php",
-          type: "POST",
-          datatype: "json",
-          data: {
-            token: getToken()
-          },
-          success: function (data) {
-            datos  = JSON.parse(data);
-            if (!datos.valido) {
-                localStorage.removeItem("s_storage");
-                window.location.href = "../index.php";
-            } 
-          },
+            url: baseUrl + "validarToken.php",
+            type: "POST",
+            datatype: "json",
+            data: {
+                token: getToken()
+            },
+            success: function (data) {
+                datos = JSON.parse(data);
+                if (!datos.valido) {
+                    localStorage.removeItem("s_storage");
+                    window.location.href = "../index.php";
+                }
+            },
         });
-      }
+    }
 
     if (!window.location.pathname.endsWith('deportistas.php') && sessionStorage.getItem('informe')) {
         sessionStorage.removeItem('informe');
@@ -177,7 +177,32 @@ $(document).ready(function () {
                 var datos = JSON.parse(data);
 
                 if (datos.registros.length > 0) {
+                    $.each(datos.funciones, function (key, funcion) {
+                        $("#funcion").append(
+                            "<option value=" + funcion.id + ">" + funcion.nombre + "</option>"
+                        );
+                    });
+
+                    $.each(datos.ciclos, function (key, ciclo) {
+                        $("#ciclo").append(
+                            "<option value=" + ciclo.id + ">" + ciclo.nombre + "</option>"
+                        );
+                    });
+
+                    $.each(datos.deportes, function (key, deporte) {
+                        $("#deporte").append(
+                            "<option value=" + deporte.id + ">" + deporte.nombre + "</option>"
+                        );
+                    });
+
+                    $.each(datos.ramas, function (key, rama) {
+                        $("#rama").append(
+                            "<option value=" + rama.id + ">" + rama.nombre + "</option>"
+                        );
+                    });
+
                     llenaTablaInformes(datos.registros);
+
 
                 }
             },
@@ -246,7 +271,7 @@ $(document).ready(function () {
         METHOD = "POST";
         // Crear un objeto FormData
         let formData = new FormData();
-        
+
         // Agregar la cadena JSON al objeto FormData
         formData.append('cct', EscuelaDatos.cct);
         formData.append('id_ciclo', EscuelaDatos.id_ciclo);
@@ -278,7 +303,7 @@ $(document).ready(function () {
                         title: 'Lo sentimos',
                         text: 'No se encontró información deseada'
                     });
-                    
+
                 }
 
             },
@@ -289,7 +314,7 @@ $(document).ready(function () {
                     title: 'Lo sentimos',
                     text: 'Hubo un error al obtener los datos'
                 });
-                
+
             }
         });
     });
@@ -300,7 +325,7 @@ $(document).ready(function () {
         METHOD = "POST";
         // Crear un objeto FormData
         let formData = new FormData();
-        
+
         // Agregar la cadena JSON al objeto FormData
         formData.append('cct', EscuelaDatos.cct);
         formData.append('id_ciclo', EscuelaDatos.id_ciclo);
@@ -332,7 +357,7 @@ $(document).ready(function () {
                         title: 'Lo sentimos',
                         text: 'No se encontró información deseada'
                     });
-                    
+
                 }
 
             },
@@ -343,7 +368,7 @@ $(document).ready(function () {
                     title: 'Lo sentimos',
                     text: 'Hubo un error al obtener los datos'
                 });
-                
+
             }
         });
     });
@@ -354,7 +379,7 @@ $(document).ready(function () {
         let key = parseInt($(this).val());
         $(".categoria").css("display", "none");
         $(".peso").css("display", "none");
-        $(".prueba").css("display", "none");
+        $(".prueba, .prueba2").css("display", "none");
         if ($('#funcion').val() == 1) {
             switch (key) {
                 case 1:
@@ -371,7 +396,7 @@ $(document).ready(function () {
             }
         }
     });
-    
+
     $('#rama').change(function () {
         let id_usuario = getUsuario();
         let id_nivel = getNivel();
@@ -382,6 +407,7 @@ $(document).ready(function () {
         }
         if (id_deporte == 2 && id_usuario != '' && id_rama != '') {
             getDeporteCampos('getPruebas.php?id_deporte=' + id_deporte + '&id_nivel=' + id_nivel + '&id_rama=' + id_rama, 'prueba');
+            getDeporteCampos('getPruebas.php?id_deporte=' + id_deporte + '&id_nivel=' + id_nivel + '&id_rama=' + id_rama, 'prueba2');
         }
 
     });
@@ -424,6 +450,107 @@ $(document).ready(function () {
         $('#modalSuccess').modal('hide');
         window.location.href = "index.php"
     });
+
+    // submit
+    $("#formBuscarDeportistas").submit(function (e) {
+        e.preventDefault();
+        METHOD = "POST";
+        formData = new FormData(this);
+        formData.append("METHOD", "POST");
+        formData.append("usuario", getUsuario());
+        if (validar()) {
+            $.ajax({
+                url: baseUrl + "getUserData.php",
+                type: "POST",
+                dataType: "JSON",
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    var datos = data;
+                    if (datos.data.length != 0) {
+                        llenaTablaInformes(datos.data);
+                        $("#btnCedula").css("display", "block");
+                    } else {
+                        $("#tablaPersonas tbody").empty();
+                    }
+                },
+                error: function (data) {
+                    var error = data;
+                    console.log(error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: error.menssage,
+                    });
+                },
+            });
+        }
+    });
+
+    function validar() {
+        var hasError = true;
+        $("#formBuscarDeportistas input, #formBuscarDeportistas select").each(
+            function () {
+                var input = $(this);
+                if (input.val() == "" && input.hasClass("requerido")) {
+                    input.addClass("is-invalid");
+                }
+            }
+        );
+        var numItems = $(".is-invalid").length;
+        if (numItems != 0) {
+            hasError = false;
+        }
+        return hasError;
+    }
+
+    $("#btnCedula").on("click", function () {
+        var id_usuario = getUsuario();
+        METHOD = "POST";
+
+        if (validar()) {
+            var myData = $("#formBuscarDeportistas").getFormData(METHOD, id_usuario);
+            
+            $.ajax({
+                url: baseUrl + "certificado.php",
+                type: "POST",
+                dataType: "JSON",
+                data: myData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    var a = $("<a />");
+                    a.attr("href", baseUrl + data.file);
+                    a.attr("target", "_blank");
+                    $("body").append(a);
+                    a[0].click();
+                },
+                error: function (data) {
+                    console.log(error);
+                    Swal.fire({
+                        title: "Lo sentimos",
+                        text: "No se encontró información deseada",
+                    });
+                },
+            });
+        }
+    });
+
+    $.fn.getFormData = function (metodo, id_usuario) {
+        data = new FormData();
+        var dataArray = $(this).serializeArray();
+        for (var i = 0; i < dataArray.length; i++) {
+            if (dataArray[i].value != "") {
+                data.append("id_" +dataArray[i].name, dataArray[i].value);
+            }
+        }
+        data.append("METHOD", metodo);
+        data.append("id_usuario", id_usuario);
+        return data;
+    };
 
     //Llamada de funciones
     getData();
