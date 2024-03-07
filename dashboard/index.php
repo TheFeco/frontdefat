@@ -15,20 +15,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
-                    <label for="ciclos" class="col-form-label">Ciclos:</label>
-                    <select id="ciclo" class="form-control requerido" name="ciclo">
+                    <label for="id_ciclo" class="col-form-label">Ciclos:</label>
+                    <select id="id_ciclo" class="form-control requerido" name="id_ciclo">
                         <option value="">Seleccionar...</option>
                     </select>
                 </div>
                 <div class="col-lg-4">
-                    <label for="funciones" class="col-form-label">Funciones:</label>
-                    <select id="funcion" class="form-control requerido" name="funcion">
+                    <label for="id_funcion" class="col-form-label">Funciones:</label>
+                    <select id="id_funcion" class="form-control requerido" name="id_funcion">
                         <option value="">Seleccionar...</option>
                     </select>
                 </div>
                 <div class="col-lg-4">
-                    <label for="deportes" class="col-form-label">Deportes:</label>
-                    <select id="deporte" class="form-control" name="deporte">
+                    <label for="id_deporte" class="col-form-label">Deportes:</label>
+                    <select id="id_deporte" class="form-control" name="id_deporte">
                         <option value="">Seleccionar...</option>
                     </select>
                 </div>
@@ -36,8 +36,8 @@
             <br>
             <div class="row">
                 <div class="col-lg-3">
-                    <label for="ramas" class="col-form-label">Ramas:</label>
-                    <select id="rama" class="form-control" name="rama">
+                    <label for="id_ramas" class="col-form-label">Ramas:</label>
+                    <select id="id_rama" class="form-control" name="id_rama">
                         <option value="">Seleccionar...</option>
                     </select>
                 </div>
