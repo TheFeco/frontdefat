@@ -178,25 +178,25 @@ $(document).ready(function () {
 
                 if (datos.registros.length > 0) {
                     $.each(datos.funciones, function (key, funcion) {
-                        $("#funcion").append(
+                        $("#id_funcion").append(
                             "<option value=" + funcion.id + ">" + funcion.nombre + "</option>"
                         );
                     });
 
                     $.each(datos.ciclos, function (key, ciclo) {
-                        $("#ciclo").append(
+                        $("#id_ciclo").append(
                             "<option value=" + ciclo.id + ">" + ciclo.nombre + "</option>"
                         );
                     });
 
                     $.each(datos.deportes, function (key, deporte) {
-                        $("#deporte").append(
+                        $("#id_deporte").append(
                             "<option value=" + deporte.id + ">" + deporte.nombre + "</option>"
                         );
                     });
 
                     $.each(datos.ramas, function (key, rama) {
-                        $("#rama").append(
+                        $("#id_rama").append(
                             "<option value=" + rama.id + ">" + rama.nombre + "</option>"
                         );
                     });
@@ -544,7 +544,7 @@ $(document).ready(function () {
         var dataArray = $(this).serializeArray();
         for (var i = 0; i < dataArray.length; i++) {
             if (dataArray[i].value != "") {
-                data.append("id_" +dataArray[i].name, dataArray[i].value);
+                data.append(dataArray[i].name, dataArray[i].value);
             }
         }
         data.append("METHOD", metodo);
