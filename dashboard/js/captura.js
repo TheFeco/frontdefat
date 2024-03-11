@@ -107,6 +107,7 @@ $(document).ready(function () {
     // Mostrar los elementos según la key
     switch (key) {
       case 1:
+      case 10:
         mostrarDeportistas();
         break;
       case 2:
