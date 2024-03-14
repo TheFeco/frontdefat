@@ -477,12 +477,12 @@ $(document).ready(function () {
                     }
                 },
                 error: function (data) {
-                    var error = data;
+                    var error = data.responseJSON.message;
                     console.log(error);
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: error.menssage,
+                        text: error,
                     });
                 },
             });
